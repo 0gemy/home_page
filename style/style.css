@@ -624,7 +624,7 @@ transform: translateY(-3px);
   cursor: pointer;
   transition: 0.3s;
 }
-#prev1{
+#next1{
   transform: rotate(180deg);
 }
 
