@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="emergency.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>emergency</title>
+</head>
+
+<body>
+ <nav class="navbar">
+    <div class="nav-right">
+      <a href="index.html">  <svg width="24" height="24"   viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 17.2C22 18.1 21.75 18.95 21.3 19.67C20.47 21.06 18.95 22 17.2 22C15.45 22 13.92 21.06 13.1 19.67C12.66 18.95 12.4 18.1 12.4 17.2C12.4 14.55 14.55 12.4 17.2 12.4C19.85 12.4 22 14.55 22 17.2Z" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.3301 17.2L16.5101 18.38L19.0701 16.02" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22 8.69C22 10.66 21.49 12.4 20.69 13.91C19.81 12.98 18.57 12.4 17.2 12.4C14.55 12.4 12.4 14.55 12.4 17.2C12.4 18.43 12.87 19.55 13.63 20.4C13.26 20.57 12.92 20.71 12.62 20.81C12.28 20.93 11.72 20.93 11.38 20.81C8.48 19.82 2 15.69 2 8.69C2 5.6 4.49 3.09998 7.56 3.09998C9.37 3.09998 10.99 3.98002 12 5.33002C13.01 3.98002 14.63 3.09998 16.44 3.09998C19.51 3.09998 22 5.6 22 8.69Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</a>
+        <a href="index.html" class="logo-text">منقذك</a>
+    </div>
+
+    <div class="nav-center" id="navMenu">
+        <div class="close-btn" onclick="toggleMenu()">✕</div>
+        <a href="../index.html">رئيسية</a>
+        <a href="#">طوارئ</a>
+        <a href="#">تعلم</a>
+        <a href="#">مساعد ذكي</a>
+    </div>
+    <div class="nav-left">
+        <a href="../login-page/login.html" class="btn-login">تسجيل دخول</a>
+        <a href="#" class="btn-register">إنشاء حساب</a>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      </div>
+    </nav>
+    <div class="overlay" onclick="toggleMenu()">
+
+    </div>
+    <section class="hero">
+      <div class="main">
+        <h1> ثواني بتفرق...خليك مستعد</h1>
+        <div class="box">
+            <p>في لحظات الخطر التصرف السريع ممكن ينقذ حياة<br>
+            مهم تعرف ازاي تتعامل مع الحالات الطارئه لحد ما توصل المساعدة الطيبه
+        </p>
+        </div>
+      </div>
+    </section>
+    <section class="counter">
+        <div class="number">
+            <div class="num1" data-target="60">0%</div>
+            <p>حالات تعتمد <br>  علي سرعة التدخل </p>
+        </div>
+          <div class="number">
+            <div class="num1" data-target="123">123</div>
+            <p>رقم الإسعاف في<br> حالات الطوارئ</p>
+        </div>
+          <div class="number">
+            <div class="num1" data-target="70">0%</div>
+         <p>من الاصابات يمكن <br>  إسعافها مبدئيا </p>
+        </div>
+    </section>
+    <section class="burn">
+      <div class="container">
+    <div class="burn-text">
+      <h2>طوارئ الحروق </h2>
+      <p>لتعامل السريع والهادئ مع الحروق يقلل 
+        <br>
+من خطورتها ويحمي المصاب </p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>أبعد المصاب عن مصدر الحرارة </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>برد مكان الحرق بمياه جارية فاترة لمدة 10-20 دقيقة </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>أزل أي إكسسوارات أو ملابس ضيقة حول الحرق </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>غطِّ الحرق بشاش طبي نظيف  </li>
+      </ul>
+    </div>
+<div class="images">
+     <img src="./image/image2.jpg" class="ima1">
+      <img src="./image/image3.jpg " class="ima2">
+    </div>
+  </div>
+
+</section>
+ <section class="suffocation">
+      <div class="container">
+        <div class="images">
+     <img src="./image/image4.jpg" class="ima3">
+      <img src="./image/image6.jpg " class="ima4">
+    </div>
+
+    <div class="burn-text">
+      <h2>الإختناق </h2>
+      <p>يحدث عند إنسداد مجرى التنفس بجسم غريب </p>
+   <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>اطلب من المصاب يرفع يده </li> </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>تأكد إن مجري التنفس مفتوح </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>لا تحاول تدخل إيدك في الفم </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>لو فقد الوعي ,إبدأ الإنعاش القلبي الرئوى </li>
+      </ul>
+    </div>
+      </div>
+
+
+</section>
+<section class="burn">
+      <div class="container">
+    <div class="burn-text">
+      <h2>السكتة القلبية </h2>
+      <p> تحدث عند توقف القلب عن ضخ الدم <br>,وهي حالة طوارئ تستدعي التدخل الفوري</p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>تأكد أن المصاب غير واعي ولا يتنفس </li>
+        <li ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>إبدأ الإنعاش القلبي الرئوي (ضغطات علي الصدر)</li>
+        <li ><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>إستخدام جهاز الصدمات القلبية إن وجد </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>إستمر حتي وصول المساعدة  </li>
+      </ul>
+    </div>
+<div class="images">
+     <img src="./image/image5.jpg" class="ima1">
+      <img src="./image/image7.jpg " class="ima2">
+    </div>
+  </div>
+    </div>
+    </section>
+    <div class="notwait">
+      <h4> الطوارئ <span class="light">لاتنتظر </span></h4>
+      <p>كل ثانية قيمة وقت الطوارئ المعرفة الصحيحة قد <br> تنقذ حياة قبل وصول الإسعاف </p>
+      <video width="1000" height="700" controls>
+        <source src="video_2026-02-21_23-58-47.mp4 " type="video/mp4">
+      </video>
+    </div>
+    <!--
+  <div class="know">
+    <h5> تعرف علي فريق الطوارئ</h5>
+    <p style="font-size: 26px;">يضم مجموعة من الأطباء المدربين علي التعامل مع حالات الطوارئ.</p>
+  </div>
+<div class="team-grid">
+  <div class="doctor-card">
+    <div class="imaage">
+      <img src="image/5015c419783c6af2fada7d56cdb1c491772d455f.jpg">
+    </div>
+    <div class="info">
+      <h class="name">د:نورا خالد</h3>
+        <p class="specialty"> 
+أخصائية الحروق و الإصابات الحرجة</p>
+    </div>
+  </div>
+
+   <div class="doctor-card">
+    <div class="imaage">
+      <img src="/image/63ce4f393ac87766371a002829be09d1866e27fa (1).jpg">
+    </div>
+    <div class="info">
+      <h class="name">د:محمد علي</h3>
+        <p class="specialty"> 
+ 
+أخصائي حالات الإختناق و الإنعاش</p>
+    </div>
+  </div>
+  <div class="doctor-card">
+    <div class="imaage">
+      <img src="/image/5015c419783c6af2fada7d56cdb1c491772d455f.jpg">
+    </div>
+    <div class="info">
+      <h class="name">د:مايا حسن </h3>
+        <p class="specialty"> 
+أخصائية القلب والطوارئ القلبية</p>
+    </div>
+  </div>
+<div class="doctor-card">
+    <div class="imaage">
+      <img src="/image/63ce4f393ac87766371a002829be09d1866e27fa.jpg">
+    </div>
+    <div class="info">
+      <h class="name">د:مايا حسن </h3>
+        <p class="specialty"> 
+أخصائية القلب والطوارئ القلبية</p>
+    </div>
+  </div>
+  <div class="doctor-card">
+    <div class="imaage">
+      <img src="/image/caea1c560e19acacc827d34ec4dc1ffc806a08be.jpg">
+    </div>
+    <div class="info">
+      <h class="name">د:أحمد محمود </h3>
+        <p class="specialty"> 
+أخصائيةطوارئ واسعافات اولية</p>
+    </div>
+  </div>
+</div>
+-->
+    <footer class="footer">
+      <div class="contain">
+        <div class="foryou">
+          <h2>من أجلك</h2>
+          <div class="social">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-google-plus-g"></i>
+          </div>
+        </div>
+      <div class="links">
+        <h3>الروابط السريعة </h3>
+        <ul>
+        <li><a href="../index.html">الرئيسية</a></li>
+        <li><a href="#">نصائح</a></li>
+        <li><a href="#">الطوارئ</a></li>
+        <li><a href="#">تواصل معنا </a></li>
+        </ul>
+      </div>
+       <div class="emergency">
+        <h3>أرقام الطوارئ</h3>
+         <p>الإسعاف: 123</p>
+         <p>الشرطة: 122</p>
+         <p>المطافي: 180</p>
+        </div>
+          </div>
+       <div class="copyright">
+        <p>© 2026 منقذك</p>
+        </div>
+
+    
+    </footer>
+
+</body>
+<script src="emergency.js"></script>
+</html>

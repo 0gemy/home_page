@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <img src="login.jpeg" alt="صورة">
+            <div class="overlay-content">
+                <h3>انقاذ الأرواح يبدأ بخطوة</h3>
+                <div class="lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <a href="../index.html" class="back-btn">
+                     → الرجوع للموقع 
+                </a>
+            </div>
+    </div>
+    <div class="right">
+    <h1>تسجيل دخول <br> إلي حسابك</h1>
+    <form>
+        <label>البريد الإلكتروني</label>
+        <input type="email" placeholder="ادخل البريد الإلكتروني" required>
+        <label>كلمة المرور</label>
+        <div class="password-container">
+            <input type="password" placeholder="ادخل كلمة المرور" id="password">
+                <i class="fa-regular fa-eye eye" onclick="togglePassword()"></i>
+        </div>
+        <div class="options">
+<label class="remember">
+    <input type="checkbox">
+    حفظ كلمة المرور
+</label>
+<a href="#" class="forgot">نسيت كلمة المرور؟</a>
+        </div>
+        <button type="submit">تسجيل الدخول</button>
+        <div class="divider">
+            <span></span>
+            أو سجل لدي
+            <span></span>
+        </div>
+        <button class="google">
+    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png">
+    المتابعة باستخدام Google
+</button>
+
+<button class="facebook">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
+    المتابعة باستخدام Facebook
+</button>
+    </form>
+    </div>
+    </div>
+    <script>
+function togglePassword() {
+    var pass = document.getElementById("password");
+    if (pass.type === "password") {
+        pass.type = "text";
+    } else {
+        pass.type = "password";
+    }
+}
+</script>
+</body>
+
+</html>
