@@ -63,6 +63,7 @@ transform: translateY(-3px);
 }
 
 .btn-login {
+  text-decoration: none;
   background: #7a0000;
   color: #fff;
   border: none;
@@ -77,6 +78,7 @@ transform: translateY(-3px);
   background-color: #5c0000;
 }
 .btn-register {
+  text-decoration: none;
   background: transparent;
   color: #7a0000;
   border: 1.5px solid #7a0000;
@@ -278,14 +280,19 @@ cursor:pointer;
    min-width: 100%;
 }
 .contain{
-    width: 100%;
+width: 100%;
     display: flex;
-    justify-content: center;
-    padding: 30px;
-   
-    gap:280px;
-    flex-wrap: wrap;
+    justify-content: space-around; 
+    align-items: flex-start;    
+    padding: 30px 10px;
+    gap: 20px;               
+    flex-wrap: nowrap;       
+ 
 
+}
+.foryou {
+    flex: 1;
+    text-align: center;
 }
 .foryou h2{
     font-size: 40px;
@@ -295,6 +302,7 @@ cursor:pointer;
 
 .social{
     display: flex;
+    margin-left: 100px;
 }
 .social i {
     font-size: 18px;
@@ -303,7 +311,10 @@ cursor:pointer;
     color:#FFFFFF;
     gap: 0px;
 }
- 
+ .links {
+    flex: 1;
+    text-align: center;
+}
 .links h3 {
     margin-bottom: 20px;
 }
@@ -330,12 +341,22 @@ cursor:pointer;
     margin-top: 40px;
     font-size: 14px;
 }
+.emergency {
+    flex: 1;
+    text-align: center;
+}
+.emergency h3 {
+    margin-bottom: 20px;
+}
 .emergency p{
     line-height: 2.4;
 }
 .social2{
+  border: none;        
+    margin-top: 0;         
+    flex: 1;
+    text-align: center;
 border:1px solid #5c0000;
-  margin-top:50px;
 
 }
 .social2 p{
@@ -354,10 +375,10 @@ border:1px solid #5c0000;
 
 @media (max-width: 900px) {
   .nav-center {
-    display: flex; /* تأكد أنها ليست none هنا */
+    display: flex;
     position: fixed;
     top: 0;
-    left: -260px; /* مخفية خارج الشاشة جهة اليسار */
+    left: -260px;
     width: 260px;
     height: 100vh;
     background: #fff;
@@ -372,21 +393,20 @@ border:1px solid #5c0000;
     pointer-events: none;
   }
 
-  /* عند الضغط على الزر يتم إضافة هذا الكلاس عبر JS */
   .nav-center.show {
-    left: 0; /* تتحرك للداخل */
+    left: 0; 
     visibility: visible;
     pointer-events: auto;
     background: #7a0000;
   }
 
   .menu-icon {
-    display: block !important; /* إجبار أيقونة الهامبرجر على الظهور */
+    display: block !important; 
     cursor: pointer;
   }
 
   .close-btn {
-    display: block !important; /* إظهار زر الإغلاق داخل القائمة */
+    display: block !important; 
   }
 }
 @media (max-width: 992px){
@@ -417,7 +437,7 @@ width:220px;
 
 }
 
-/* ===== Large Phones ===== */
+
 @media (max-width: 768px){
 
 .title_img{
@@ -460,7 +480,7 @@ align-items:center;
 
 }
 
-/* ===== Small Phones ===== */
+
 @media (max-width: 480px){
 
 .logo-text{
