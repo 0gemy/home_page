@@ -146,3 +146,7 @@ prev.onclick = () => {
   index = (index - 1 + testimonials.length) % testimonials.length;
   updateTestimonial(index);
 };
+ document.querySelector(".ai-bot").addEventListener("click",() =>{
+  window.location.href="chat-ai-main/index.html";
+
+ });
