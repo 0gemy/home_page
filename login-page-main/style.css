@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    height: 100vh;
+}
+
+.left img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+.right{
+    width: 50%;
+    background: linear-gradient(to bottom right, #5a0000, #b30000, #ff1a1a);
+color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.right h1 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+form {
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+}
+input:not([type="checkbox"]) {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 25px;
+    width: 100%;
+}
+
+button {
+    padding: 12px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+form label {
+    font-weight: 600;
+    color: white;
+    display: block;
+    margin-bottom: 4px;
+}
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.remember input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+.remember input:checked::after {
+    content: "✔";
+    font-size: 9px;
+    position: absolute;
+    color: #c40000;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+.remember input {
+    box-shadow: 0 2px 6px rgba(61, 60, 60, 0.2);
+}
+.forgot {
+    color: white;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+    font-size: 14px;
+}
+
+.divider span {
+    flex: 1;
+    height: 1px;
+    background: white;
+    margin: 0 10px;
+}
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding-left: 45px;
+    border-radius: 30px;
+    border: none;
+}
+
+.eye {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-85%);
+    color: rgba(57, 55, 55, 0.4);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.google, .facebook {
+    background: white;
+    color: black;
+    border-radius: 30px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.google img,
+.facebook img {
+    width: 18px;
+}
+.fa-eye {
+    color: #5a5858;
+    font-size: 16px
+}
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+}
+button:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+.left{
+    position: relative;
+}
+.overlay-content {
+    position: absolute;
+    bottom: 60px;
+    right: 50%;
+    transform: translateX(50%);
+    text-align: center;
+    color: white;
+}
+.lines {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.lines span {
+    width: 40px;
+    height: 3px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+}
+.back-btn {
+    padding: 8px 20px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.password-container i {
+    position: absolute;
+    left: 15px; 
+    top: 50%;
+    transform: translateY(-85%) scale(1);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+    color: #999;
+}
+.password-container i:hover {
+    transform: translateY(-85%) scale(1.2);
+    color: #666;
+}
+ form label {
+font-weight: 600;
+}
+h2 {
+    font-weight: bold;
+}
+.form-control {
+    border: none;
+    padding: 10px 15px;
+}
+.form-control:focus {
+    box-shadow: none;
+    border: none;
+}
+.btn-light {
+    font-weight: 600;
+}
+.overlay-text {
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.overlay-text h4 {
+    font-weight: 600;
+}
+.eye-icon {
+    top: 70%;
+    left: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+}
+.signup-page .terms-check {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    direction: rtl;
+}
+.signup-page .terms-check input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border: 2px solid white;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+.signup-page .terms-check input[type="checkbox"]:checked::after {
+    content: "✔";
+    font-size: 14px;
+    color: #a00000; 
+    position: absolute;
+    top: -3px;
+    right: 2px;
+}
+.signup-page .terms-check label {
+    border-bottom: 1px solid white;
+    padding-bottom: 2px;
+}
+.signup-page hr {
+    border: none;
+    height: 2px;
+    background: #ffffff;
+    opacity: 1;
+}
+.social-btn.facebook i {
+    background: #1877f2;
+    color: white;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+.image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+::placeholder {
+    color: #bbbbbb;
+}
+.gender-select{
+    width: 100%;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    background-color: white;
+    font-size: 16px;
+    outline: none;
+    margin-top: 10px;
+    
+    direction: rtl;
+    padding-left: 35px;
+
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23888' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 15px center;
+    background-size: 16px;
+}
+.gender-select:focus{
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
+    outline: none;
+}
+.gender-select .opsation{
+    color: #fff;
+    background-color: #a00000;
+}
+
+.container{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.row{
+    flex-direction: row-reverse;
+}
+.lines {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.lines span {
+    width: 40px;
+    height: 3px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+}
+.back-btn {
+    padding: 8px 20px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
