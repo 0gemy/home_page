@@ -1,491 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصحة والسلامة</title>
-    <link rel="icon" type="image/png" href="img/Gemini_Generated_Image_ncqwgvncqwgvncqw.png">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-   
-    <link rel="stylesheet" href="style/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title> Education</title>
+    <link rel="icon" type="image/png" href="../img/Gemini_Generated_Image_ncqwgvncqwgvncqw.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
 
-</head>
-<body>
+  <body>
+    <nav class="navbar">
+      <div class="nav-right">
+        <a href="index.html">
+          <img
+            src="../img/Gemini_Generated_Image_ncqwgvncqwgvncqw.png"
+            alt="logo"
+            class="logo-img" 
+        /></a>
+        <a href="../index.html" class="logo-text">الصحة والسلامة</a>
+      </div>
 
-<nav class="navbar">
-
-    <div class="nav-right">
-      <a href="index.html">  <img src="img/Gemini_Generated_Image_ncqwgvncqwgvncqw.png" alt="logo" class="logo-img"></a>
-        <a href="index.html" class="logo-text">الصحة والسلامة</a>
-    </div>
-
-    <div class="nav-center" id="navMenu">
+      <div class="nav-center" id="navMenu">
         <div class="close-btn" onclick="toggleMenu()">✕</div>
-        <a href="index.html">رئيسية</a>
-        <a href="emergency-main/energency.html">طوارئ</a>
-        <a href="Education/Education.html">تعلم</a>
-        <a href="chat-ai-main/index.html">مساعد ذكي</a>
-    </div>
-    <div class="nav-left">
-        <a  href="login-page-main/login.html" class="btn-login" >تسجيل دخول</a>
-        <a  href="login-page-main/signup.html" class="btn-register">إنشاء حساب</a>
+        <a href="../index.html">رئيسية</a>
+        <a href="../emergency-main/energency.html">طوارئ</a>
+        <a href="Education.html">تعلم</a>
+        <a href="../chat-ai-main/index.html">مساعد ذكي</a>
+      </div>
+      <div class="nav-left">
+        <a href="../login-page-main/login.html" class="btn-login">تسجيل دخول</a>
+        <a href="../login-page-main/signup.html" class="btn-register">إنشاء حساب</a>
         <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      
       </div>
     </nav>
     <div class="overlay" onclick="toggleMenu()"></div>
+    <br /><br /><br /><br /><br />
+    <section class="videos-section">
+      <div class="title_img">
+        <div>
+          <h1 class="title">تعلم كيف تنقذ حياة</h1>
+          <p class="subtitle">مسارات تعليمية منظمة بأسلوب واضح وعملي.</p>
+        </div>
+        <div class="img_title">
+          <img src="../img/download__1_-removebg-preview 1.png" alt="" />
+          <h3>تحت رعاية</h3>
+        </div>
+      </div>
+      
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder=" ماذا تريد أن تتعلم اليوم........ " />
+        <i class="fas fa-search"></i>
+      </div>
 
-<!--start header-->
-<header class="header-home">
-    <div class="img-header">
-        <img src="img/Rectangle 2.png" alt="">
-    </div> 
+      <div class="videos-container" id="videosContainer">
 
-    <div class="header-content"> 
-        <h1>وعيك الطبي <br><span> مُنقذ حياتك </span></h1>
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/الحروق.png">
+            <source
+              src="Vid_e/طريقة التعامل مع مصاب الحروق(720P_60FPS).mp4"
+              type="video/mp4"
+            />
+          </video>
+          <h3 class="video-title">كيفية التعامل مع الحروق </h3>
+          <a href="Quiz/الحروق.html" class="quiz-btn">اختبر نفسك</a>
+        </div>
 
-        <p>
-            محتوى موثوق دعم<br>
-            خدمات ذكية تساعدك في اللحظة المهمة 
-        </p>
-
-        <button class="ai-bot" >
-            اسأل المساعد الذكي
-            <img src="img/timer-start.png" alt="">
-        </button>
-    </div>
-</header>
-<!--End header home-->
-<section class="services">
-  <div class="container">
-
-    <h2 class="title-services">
-    كل الي <span>تحتاجه لسلامتك</span>
-    </h2>
-
-    <p class="title2">
-      نوفر لك مجموعة من الخدمات الصحية التوعوية<br>
-      التي تدعمك في الحالات الطارئة والتعليمية
-    </p>
-
-    <div class="cards">
         
-        <div class="card">
-            <div class="icon">
-                <img src="img/book.png" alt="">
-            </div>
-            <p>
-                نصائح وإرشادات طبية معتمدة<br>
-                وموثوقة علميًا
-            </p>
-        </div>
-        
-        <div class="card">
-            <div class="icon">
-                <img src="img/shield-tick.png" alt="">
-            </div>
-            <p>
-          حماية بيانات المستخدمين<br>
-          وخصوصيتهم مضمونة
-        </p>
-    </div>
-        <div class="card">
-            <div class="icon">
-                <img src="img/note-2.png" alt="">
-            </div>
-            <p>
-                محتوى تعليمي موثوق لتعليم<br>
-                الإسعافات الأولية للأطفال والكبار
-            </p>
-        </div>
-        
-    
-          <div class="card">
-            <div class="icon">
-              <img src="img/truck-time.png" >
-            </div>
-            <p>
-              استجابة سريعة مع أرقام الإسعاف<br>
-              الحقيقة والمستشفيات القريبة
-            </p>
-          </div>
-
-    </div>
-  </div>
-</section>
-<section class="next-section">
-  <div class="next-container">
-
-    <div class="learn-right">
-      <h2>
-        تعلم الإسعافات الأولية بسهولة <br>وثقة <span>لتكون مستعدًا</span>دائمًا
-      </h2>
-
-      <div class="learn-buttons">
-        <a href="Education/Education.html" class="btn btn-primary">ابدأ التعلم الآن</a>
-        <a href="emergency-main/emergency.html" class="btn btn-outline">اطلع على أبرز النصائح</a>
-      </div>
-    </div>
-    <div class="learn-left">
-      <p>
-        فيديوهات ودورات لجميع الأعمار تساعدك على تعلم الإسعافات الأولية
-        بطريقة سهلة وسريعة، وتجعلك جاهزًا للتصرف بثقة في أي حالة طارئة.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="video-section">
-  <div class="video">
-<video  controls width="400" autoplay muted loop>
-  <source  src="img/vid89750_2026-02-22-04-17.mp4" type="video/mp4">
-</video>
-
-  </div>
-</section>
-<!--End video-->
-<div class="assistant-section">
-
-    <h2 class="assistant-title">
-      مساعد ذكي يرشدك وقت الطوارئ
-    </h2>
-
-    <div class="assistant-content">
-      <div class="assistant-text">
-
-        <div class="feature">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
-</svg>
-
-         
-          <p>
-            يجيب على أسئلتك الصحية بسرعة ووضوح ويوفر إرشادات
-            فورية للتعامل مع الحالات الطارئة الشائعة
-          </p>
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/الاختناق.png" >
+            <source src="Vid_e/إسعاف المصاب بالغصة أو الإختناق(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title"> الاسعافات الاولية للاختناق</h3>
+          <a href="Quiz/الاختناق.html" class="quiz-btn">اختبر نفسك</a>
         </div>
 
-        <div class="feature">
-          <img src="img/brain2.png" alt="">
-          <p>
-            إرشادات مبسطة تناسب جميع الأعمار يشرح الخطوات
-            بطريقة سهلة للكبار والأطفال بدون تعقيد
-          </p>
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/الغيبوبة.png">
+            <source src="Vid_e/كيفية التعامل مع المصاب بالغيبوبة(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">التصرف السريع في حالات الغيبوبة</h3>
+          <a href="Quiz/الغيبوبة.html" class="quiz-btn">اختبر نفسك</a>
         </div>
 
-        <div class="feature">
-          <img src="img/convert-3d-cube.png" alt="">
-          <p>
-            متاح في أي وقت ومن أي مكان يساعدك حتى قبل وصول
-            الإسعاف أو التوجه لأقرب مركز
-          </p>
+
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/الكسور.png" >
+            <source src="Vid_e/طريقة التعامل مع الكسور(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">التعامل مع الكسور </h3>
+          <a href="Quiz/الكسور.html" class="quiz-btn">اختبر نفسك</a>
         </div>
 
-        <div class="feature">
-          <img src="img/shield-tick.png" alt="">
-          <p>
-            مبني على مصادر طبية موثوقة يعتمد على إرشادات
-            معتمدة في الإسعافات الأولية والتوعية الصحية
-          </p>
-        </div>
-      </div>
-         <div class="assistant-image">
-        <img src="img/Screenshot 2026-01-26 052806 1.png" alt="assistant">
-      </div>
-    </div>
-
-</div>
-<!--===========================Map================================-->
-
-<section class="nearest-center">
-
-  <h2 class="nc-title">أقرب مركز</h2>
-  <p class="nc-subtitle">
-    كل دقيقة بتفرق اعرف  <span>أقرب مركز بسرعة</span>
-  </p>
-
-  <!-- الخريطة الحقيقية -->
-  <div id="nc-map"></div>
-  <div class="nc-cards">
-    <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/brain-svgrepo-com.png" alt="">
-        <h3>مساعد الإسعاف الذكي</h3>
-      </div>
-      <p>
-        مساعد ذكي يقدم إرشادات أولية
-        ونصائح فورية.
-      </p>
-      <button class="click-mab">ابدأ المحادثة</button>
-    </div>  
-    
-    <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/phone-receiver-telephone-svgrepo-com.png" alt="">
-        <h3>التواصل مع الإسعاف</h3>
-      </div>
-      <p>
-        وفرنا لك وسائل التواصل الرسمية
-        مع خدمات الإسعاف.
-      </p>
-      <a href="tel:123" class="click-mab">اتصال مباشر بالإسعاف</a>
-
-    </div>
-  
-    <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/location-tick.png" alt="">
-        <h3>أقرب مركز إسعاف</h3>
-      </div>
-      <p>
-     كل دقيقه بتفرق اعرف اقرب مركز بسرعه
-      </p>
-      <button id="findNearest" class="click-mab">عرض على الخريطة</button>
-    </div>
-  </div>
-
-</section>
-<!--============================End mab=======================-->
-
-
-<!--=======================saidbar=======================-->
-<section class="revision-section">
-  <div class="slider">
-    <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
    
-      <h2 class="revision-title" >اخطاء شائعه لازم تعرفها</h2>
-      <div class="revision-card revision-top">
-        <p class="card-text" id="badge-false">الخطأ ✕</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <p class="card-text" id="badge-true" >الصح ✓</p>
-      </div>
-    </div>
-    <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      <div class="revision-card revision-top">
-        <span class="badge wrong ">الخطأ ✕</span>
-        <p class="card-text">وضع بن على الجروح لوقف النزيف</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يسيب عدوي و يصعب تنظيف الجرح لو احتاج غرز الافضل تنظيف الجرح بشاش و الضغط عليه</p>
-      </div>
-    </div>
-     <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">سحب جسم او الة من داخل الجسم</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">تحريكه ممكن يعرضه لنزيف خطير او تفاقم الاصابه فالافضل ماتسحبهوش ولو خرج ماترجعهوش و تطلب تدخل المختصين</p>
-      </div>
-    </div>
-       <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">وضع معجون سنان علي الحروق</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">تبريد مكان الحرق بماء فاتر جارٍ لبضع دقائق ثم تغطيته بضمادة نظيفة</p>
-      </div>
-    </div>
-    
-       <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">تحريك شخص بعد حادث</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge right">الصح ✓</span>
-        <p class="card-text">ممكن يفاقم الاصابه او الكسر الافضل عدم تحريكه و ثباته لحين تدخل المختصين و تقديم الاجراء المناسب</p>
-      </div>
-    </div>
-           <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">فرك العين لازالة جسم غريب</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يؤدي لضرر اكبر في عينك.. الافضل غسلها بمياه نظيفه لمده 15 دقيقه لخروج الجسم ولو لسه موجود الالم مستمر زور الدكتور.</p>
-      </div>
-    </div>
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">ربط منطقة نزيف الجرح الشديد</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يؤدي لتلف الانسجه و البتر. الافضل ماتلجأش للطريقه دي الا كملاذ اخير بحالات النزيف الشديد اللي مابيقفش بالضغط عليه</p>
-      </div>
-    </div>
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">ربط منطقه لدغه الثعبان</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يسبب ضرر شديد نتيجه تجمع السم بمنطقه واحده الافضل ثبات الجزء المصاب لمنع انتشار السم لحين التدخل بالمضاد المناسب</p>
-      </div>
-    </div>
-   
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">وضع معجون سنان علي الحروق</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text"> تبريد مكان الحرق بماء فاتر جارٍ
- لبضع دقائق ثم تغطيته بضمادة نظيفة</p>
-      </div>
-    </div>
-     <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text"> الإفراط في استخدام معطرات الجو والروائح الصناعية داخل الغرف المغلقة</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">استخدام المعطرات والمنظفات بكميات معتدلة مع تهوية المكان جيدًا لتقليل استنشاق المواد الكيميائية</p>
-      </div>
-    </div>
-         <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">خلط الكلور مع الأمونيا أو أي منظف آخر (مثل بعض منظفات الدهون والارضيات ) </p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text"> عدم خلط الكلور مع أي مواد أخرى لأن ذلك قد ينتج غازات سامة خطيرة على الجهاز التنفسي</p>
-      </div>
-    </div>
-  </div>
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/الانعاش القلبي.jpg">
+            <source src="Vid_e/الإنعاش القلبي الرئوي(720P_HD).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">الإنعاش القلبي الرئوي خطوة بخطوة</h3>
+          <a href="Quiz/الانعاش القلبي.html" class="quiz-btn">اختبر نفسك</a>
+        </div>
 
-  <div class="slider-controls">
-    <button  class="arrow prev">❮</button>
-    <button id="next1" class="arrow next">❮</button>
-  </div>
-</section>
+       
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/النزيف.png" >
+            <source src="Vid_e/إسعاف المصاب بالنزيف(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">كيفية التعامل مع النزيف</h3>
+          <a href="Quiz/النزيف.html" class="quiz-btn">اختبر نفسك</a>
+        </div>
 
-<!--==============================================-->
-<section class="testimonials">
-  <div class="bg-circle"></div> 
-  
-  <div class="container">
-    
-    <div class="testimonials-box">
-      <!-- العنوان -->
-      <div class="title">
-        <h2>آراء العملاء</h2>
-        <hr class="line">
+      
+        <div class="video-card">
+          <video controls loading="lazy" poster="img/نزيف الانف.png">
+            <source src="Vid_e/إسعاف نزيف الأنف _الرعاف_(720P_HD).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">كيفية التعامل مع نزيف الانف</h3>
+          <a href="Quiz/نزيف الانف.html" class="quiz-btn">اختبر نفسك</a>
+        </div>
+             <div class="video-card">
+          <video controls loading="lazy" poster="img/اللدغات السامة.png">
+            <source src="Vid_e/إسعاف المصاب باللدغات السامة(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title">الإسعافات الأولية للتعامل مع اللدغات السامه</h3>
+          <a href="Quiz/اللدغات السامة.html" class="quiz-btn">اختبر نفسك</a>
+        </div>     <div class="video-card">
+          <video controls loading="lazy" poster="img/انقاذ غريق.png" >
+            <source src="Vid_e/كيفية إنقاذ الغريق(720P_60FPS).mp4" type="video/mp4" />
+          </video>
+          <h3 class="video-title"> كيف تنقذ غريق</h3>
+          <a href="Quiz/انقاذ غريق.html" class="quiz-btn">اختبر نفسك</a>
+        </div>
+        <div class="video-card">
+ <video controls loading="lazy" poster="img/الازمات التنفسية.png" >
+   <source src="Vid_e/إسعاف مرضى الأزمات التنفسية(720P_60FPS).mp4" type="video/mp4" />
+ </video>
+ <h3 class="video-title">الاسعافات الاولية للازمات التنفسية</h3>
+ <a href="Quiz/الازمات التنفسية.html" class="quiz-btn">اختبر نفسك</a>
+     </div>    
+      <div class="video-card">
+ <video controls loading="lazy" poster="img/الاجهاد الحراري.png" >
+   <source src="Vid_e/إسعاف المصاب بالاجهاد الحراري(720P_60FPS).mp4" type="video/mp4" />
+ </video>
+ <h3 class="video-title"> الاسعافات الاولية للاجهاد الحراري(ضربة شمس)</h3>
+ <a href="Quiz/الاجهادالحراري.html" class="quiz-btn">اختبر نفسك</a>
+</div>
+<div class="video-card">
+ <video controls loading="lazy" poster="img/الصرع.png" >
+   <source src="Vid_e/إسعاف المصاب بحالة صرع(720P_60FPS).mp4" type="video/mp4" />
+ </video>
+ <h3 class="video-title">الااسعافات الاولية للتعامل مع حالات الصرع</h3>
+ <a href="Quiz/حالات الصرع.html" class="quiz-btn">اختبر نفسك</a>
+</div>
+
+            </div>
+        </div>
+        
       </div>
+    </section>
 
-      <!-- المحتوى -->
-      <div class="content">
-
-     
-
-        <!-- النص -->
-        <div class="testimonial-text">
-          <p id="testimonialMessage">
-            الموقع ساعدني أفهم أتصرف إزاي في موقف طارئ بهدوء،
-            والمعلومات كانت واضحة وسهلة
+    <footer class="footer">
+      <div class="floating-section">
+        <div class="floating-img">
+          <img src="img/Rectangle 76.png" />
+        </div>
+        <div class="floating-text">
+          <p>
+            تعلم مهارات الاسعافات الاولية الاساسية <br />
+            بخطوات بسيطة و سريعة
           </p>
         </div>
-         <div class="curve"></div>
-           <!-- صور العملاء -->
-        <div class="avatars">
-          <div class="avatar" data-index="1">
-            <span class="name">Said Ahmed</span>
-            <img src="img/a_user01_avatar.png" alt="">
-          </div>
-          <div class="avatar active" data-index="0">
-            <span class="name">Ahmed kamel</span>
-            <img src="img/a_user03_avatar.png" alt="">
-          </div>
-          
-          
-          <div class="avatar" data-index="2">
-            <span class="name">Nouran Mohamed</sp>
-        
-            <img src="img/a_user02_avatar.png" alt="">
-          </div>
-        </div>
-
       </div>
-
-      <!-- الأسهم -->
-      <div class="arrows">
-        <button id="prev">❮</button>
-        <button id="next">❮</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-<section class="sources">
-<h1>تم إعداد المحتوى بناءً على مصادر طبية رسمية ومعتمدة</h1>
-<div class="img-sources">
-<img src="img/logo 1.png" alt="">
-<img src="img/Screenshot 2026-01-29 025149 1.png" alt="">
-<img src="img/Emblem_of_the_ICRC.svg 1.png" alt="">
-</div>
-</section>
-<footer class="footer">
+      
       <div class="contain">
+        <div class="social2">
+     <img  src="Vid_e/images.png" alt="">
+        <p>تم الاستعانه بالفيديوهات التعليمية من <br>الهلال الاحمر السعودي</p>
+        </div>
         <div class="foryou">
+          <img src="../img/download__1_-removebg-preview 2.png" alt="" />
           <h2>من أجلك</h2>
           <div class="social">
-          <i class="fab fa-facebook-f"></i>
-          <i class="fab fa-twitter"></i>
-          <i class="fab fa-instagram"></i>
-          <i class="fab fa-google-plus-g"></i>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-google-plus-g"></i>
+            
           </div>
         </div>
-      <div class="links">
-        <h3>الروابط السريعة </h3>
-        <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="emergency-main/emergency.html">الطوارئ</a></li>
-        <li><a href="Education/Education.html">تعلم</a></li>
-        <li><a href="">تواصل معنا </a></li>
-        </ul>
+        <div class="links">
+          <h3>الروابط السريعة</h3>
+          <ul>
+            <li><a href="../index.html">الرئيسية</a></li>
+            <li><a href="Education.html">نصائح</a></li>
+            <li><a href="../emergency-main/energency.html">الطوارئ</a></li>
+            <li><a href="#">تواصل معنا </a></li>
+          </ul>
+        </div>
+        <div class="emergency">
+          <h3>أرقام الطوارئ</h3>
+          <p>الإسعاف: 123</p>
+          <p>الشرطة: 122</p>
+          <p>المطافي: 180</p>
+        </div>
       </div>
-       <div class="emergency">
-        <h3>أرقام الطوارئ</h3>
-         <p>الإسعاف: 123</p>
-         <p>الشرطة: 122</p>
-         <p>المطافي: 180</p>
-        </div>
-          </div>
-       <div class="copyright">
-        <p>© 2026 منقذك</p>
-        </div>
-
-    
+      <div class="copyright">
+        <p>© 2026 الصحة والسلامة</p>
+      </div>
     </footer>
 
-
-
-
-
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/main.js"></script>
-</body>
+    <script src="js/main.js"></script>
+  </body>
 </html>
