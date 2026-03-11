@@ -435,12 +435,68 @@ transform: translateY(-3px);
   color: #84a07a;
 }
 
+/* ── الخريطة ── */
 #nc-map {
   height: 420px;
   max-width: 900px;
-  margin: 0 auto 40px;
-  border-radius: 16px;
+  margin: 0 auto 16px;
+  border-radius: 18px;
+  border: 3px solid #84a07a;
+  box-shadow: 0 8px 32px rgba(0,0,0,.13);
+  transition: box-shadow .3s;
 }
+#nc-map:hover { box-shadow: 0 12px 40px rgba(0,0,0,.18); }
+
+/* ── شريط الحالة ── */
+.map-status {
+  max-width: 540px;
+  margin: 0 auto 18px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+}
+.map-status.hidden  { display: none; }
+.map-status.loading { background: #fff8e1; color: #7a5800; border: 1px solid #ffc107; }
+.map-status.success { background: #e8f5e9; color: #1b5e20; border: 1px solid #84a07a; }
+.map-status.error   { background: #fdecea; color: #7a0000; border: 1px solid #e57373; }
+
+/* ── كارد نتيجة المستشفى ── */
+.hospital-info {
+  display: none;
+  max-width: 540px;
+  margin: 0 auto 30px;
+  background: #fff;
+  border: 1.5px solid #84a07a;
+  border-radius: 14px;
+  padding: 16px 22px;
+  text-align: right;
+  direction: rtl;
+  box-shadow: 0 4px 16px rgba(132,160,122,.15);
+  animation: fadeSlideIn .35s ease;
+}
+.hospital-info.visible { display: block; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hospital-info h4 { margin: 0 0 6px; color: #650101; font-size: 16px; }
+.hospital-info p  { margin: 0 0 10px; font-size: 14px; color: #444; }
+.hospital-info a {
+  display: inline-block;
+  background: #84a07a;
+  color: #fff;
+  padding: 7px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background .3s;
+}
+.hospital-info a:hover { background: #5e7a54; }
+
+/* ── زر disabled ── */
+#findNearest:disabled { opacity: .6; cursor: not-allowed; }
 
 .nc-cards {
   display: flex;
@@ -1426,5 +1482,3 @@ justify-content: center;
   }
 
 }
-
-
