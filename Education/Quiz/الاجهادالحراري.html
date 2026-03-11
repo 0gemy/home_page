@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اختبار الاجهاد الحراري</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="quiz-wrapper">
+
+    <!-- Right Quiz Panel -->
+    <div class="quiz-panel">
+
+      <!-- Header: progress + counter -->
+      <div class="quiz-header">
+        <span class="question-counter" id="questionCounter">1 / 10</span>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Remaining Counter (shows after answering) -->
+      <div class="remaining-counter" id="remainingCounter"></div>
+
+      <!-- Question -->
+      <h1 class="question-title" id="questionTitle"></h1>
+      <p class="question-subtitle" id="questionSubtitle"></p>
+
+      <!-- Options -->
+      <div class="options-container" id="optionsContainer"></div>
+
+      <!-- Feedback -->
+      <div class="feedback-box" id="feedbackBox"></div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <button class="btn-continue" id="btnContinue">استمر</button>
+        <button class="btn-back" id="btnBack">الرجوع </button>
+      </div>
+
+    </div>
+
+    <!-- Left Image Panel -->
+    <div class="image-panel">
+      <div class="image-slider" id="imageSlider"></div>
+      <div class="image-overlay"></div>
+      <div class="dots-container" id="dotsContainer"></div>
+      <button class="back-site-btn" onclick="location.href='../Education.html'">← الرجوع للموقع</button>
+    </div>
+
+  </div>
+
+  <script>
+    // ===== DATA =====
+
+const images = [
+  "img/download.jpg",
+  "img/First Aid At Home.jpg",
+  "img/Tu Paramédico Y Tu Personaje.jpg",
+];
+
+const questions = [
+  {
+    question: "ما المقصود بالإجهاد الحراري؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "انخفاض درجة حرارة الجسم",
+      "كسر في العظام",
+      "ارتفاع حرارة الجسم بسبب التعرض للحرارة لفترة طويلة",
+      "التهاب في المفاصل"
+    ],
+    correct: 2,
+  },
+  {
+    question: "من الأعراض الشائعة للإجهاد الحراري:",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "برودة الجسم",
+      "التعرق الشديد والتعب",
+      "زيادة الشهية",
+      "ألم في الأذن"
+    ],
+    correct: 1,
+  },
+  {
+    question: "ما أول خطوة يجب القيام بها عند إصابة شخص بالإجهاد الحراري؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "نقله إلى مكان بارد أو مظلل",
+      "جعله يجري",
+      "إعطاؤه طعام",
+      "تغطيته ببطانية"
+    ],
+    correct: 0,
+  },
+  {
+    question: "ماذا يمكن أن يساعد في خفض حرارة المصاب؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "الماء البارد أو الكمادات الباردة",
+      "الماء الساخن",
+      "التدليك القوي",
+      "الجري"
+    ],
+    correct: 0,
+  },
+  {
+    question: "ماذا يمكن إعطاؤه للمصاب إذا كان واعيًا؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "طعام دسم",
+      "قهوة",
+      "ماء أو سوائل",
+      "دواء عشوائي"
+    ],
+    correct: 2,
+  },
+  {
+    question: "لماذا يجب تبريد جسم المصاب؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "لتقليل ارتفاع درجة الحرارة",
+      "لزيادة التعرق",
+      "لزيادة ضربات القلب",
+      "لتقليل الحركة"
+    ],
+    correct: 0,
+  },
+  {
+    question: "من العلامات التي قد تظهر على المصاب:",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "الدوخة والتعب",
+      "زيادة الطول",
+      "تغير لون الشعر",
+      "زيادة الوزن"
+    ],
+    correct: 0,
+  },
+  {
+    question: "ماذا يجب فعله إذا لم تتحسن حالة المصاب؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تركه يستريح",
+      "طلب المساعدة الطبية",
+      "إعطاؤه طعام",
+      "جعله يمشي"
+    ],
+    correct: 1,
+  },
+  {
+    question: "أثناء إسعاف المصاب بالإجهاد الحراري يجب:",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تركه في الشمس",
+      "جعله يجري",
+      "إعطاؤه أدوية عشوائية",
+      "مراقبة حالته باستمرار",
+    ],
+    correct: 3,
+  },
+  {
+    question: "الهدف من الإسعافات الأولية للإجهاد الحراري هو:",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "علاج الحالة نهائيًا",
+      "خفض حرارة الجسم ومنع تفاقم الحالة",
+      "زيادة النشاط",
+      "إزالة العرق"
+    ],
+    correct: 1,
+  },
+];
+
+// ===== STATE =====
+let currentQuestion = 0;
+let answered        = false;
+let currentImg      = 0;
+let score           = 0;
+let answeredCorrectly = new Array(questions.length).fill(false);
+
+// ===== DOM REFS =====
+const imageSlider      = document.getElementById("imageSlider");
+const dotsContainer    = document.getElementById("dotsContainer");
+const progressBar      = document.getElementById("progressBar");
+const questionCounter  = document.getElementById("questionCounter");
+const questionTitle    = document.getElementById("questionTitle");
+const questionSubtitle = document.getElementById("questionSubtitle");
+const optionsContainer = document.getElementById("optionsContainer");
+const feedbackBox      = document.getElementById("feedbackBox");
+const remainingCounter = document.getElementById("remainingCounter");
+const btnContinue      = document.getElementById("btnContinue");
+const btnBack          = document.getElementById("btnBack");
+
+// ===== IMAGE SLIDER =====
+
+function buildDots() {
+  dotsContainer.innerHTML = "";
+  images.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function updateImage() {
+  // fade out slowly (800ms)
+  imageSlider.style.transition = "opacity 0.8s ease";
+  imageSlider.style.opacity = "0";
+  setTimeout(() => {
+    imageSlider.style.backgroundImage = `url('${images[currentImg]}')`;
+    // fade in slowly (1000ms)
+    imageSlider.style.transition = "opacity 1s ease";
+    imageSlider.style.opacity = "1";
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.classList.toggle("active", i === currentImg);
+    });
+  }, 800);
+}
+
+function startSlider() {
+  imageSlider.style.backgroundImage = `url('${images[0]}')`;
+  imageSlider.style.opacity = "1";
+  setInterval(() => {
+    currentImg = (currentImg + 1) % images.length;
+    updateImage();
+  }, 4000);
+}
+
+// ===== PROGRESS BAR =====
+function updateProgress(forceComplete) {
+  const pct = forceComplete
+    ? 100
+    : Math.round((currentQuestion / questions.length) * 100);
+  progressBar.style.width = pct + "%";
+}
+
+// ===== QUIZ =====
+
+function loadQuestion(index) {
+  const q = questions[index];
+  answered = false;
+
+  // counter & progress
+  questionCounter.textContent = `${index + 1} / ${questions.length}`;
+  updateProgress();
+
+  // titles
+  questionTitle.textContent    = q.question;
+  questionSubtitle.textContent = q.subtitle;
+
+  // clear feedback & remaining counter
+  feedbackBox.className   = "feedback-box";
+  feedbackBox.textContent = "";
+  remainingCounter.innerHTML = "";
+
+  // show continue btn if hidden
+  btnContinue.style.display = "";
+
+  // build options
+  optionsContainer.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn         = document.createElement("button");
+    btn.className     = "option-btn";
+    btn.dataset.idx   = i;
+    btn.innerHTML     = `<span class="option-text">${opt}</span><span class="option-icon"></span>`;
+    btn.addEventListener("click", () => handleAnswer(i));
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleAnswer(selectedIdx) {
+  if (answered) return;
+  answered = true;
+
+  const q       = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option-btn");
+
+  if (selectedIdx === q.correct) score++;
+
+  buttons.forEach((btn, i) => {
+    btn.disabled   = true;
+    const icon     = btn.querySelector(".option-icon");
+
+    if (i === q.correct) {
+      btn.classList.add("correct");
+      icon.textContent = "✔";
+      icon.className   = "option-icon ok";
+    } else if (i === selectedIdx) {
+      btn.classList.add("wrong");
+      icon.textContent = "✖";
+      icon.className   = "option-icon bad";
+    } else {
+      btn.classList.add("dimmed");
+    }
+  });
+
+  // remaining questions (after answering current)
+  const remaining = questions.length - (currentQuestion + 1);
+
+  // update the dedicated remaining counter
+  if (remaining > 0) {
+    remainingCounter.innerHTML = `
+      <span class="rc-icon">📋</span>
+      تبقى <strong>${remaining}</strong> سؤال من أصل <strong>${questions.length}</strong>
+    `;
+    remainingCounter.className = "remaining-counter show";
+  } else {
+    remainingCounter.innerHTML = `<span class="rc-icon">🎯</span> هذا هو السؤال الأخير!`;
+    remainingCounter.className = "remaining-counter show last";
+  }
+
+  if (selectedIdx === q.correct) {
+    feedbackBox.innerHTML = `✔ إجابة صحيحة! أحسنت 🎉`;
+    feedbackBox.className = "feedback-box show success";
+  } else {
+    feedbackBox.innerHTML = `✖ إجابة خاطئة — الإجابة الصحيحة هي: <strong>${q.options[q.correct]}</strong>`;
+    feedbackBox.className = "feedback-box show error";
+  }
+}
+
+// ===== END SCREEN =====
+
+function showEndScreen() {
+  updateProgress(true);
+
+  const total = questions.length;
+  const pct   = Math.round((score / total) * 100);
+  const emoji = pct >= 80 ? "🏆" : pct >= 50 ? "👍" : "📚";
+  const msg   = pct >= 80 ? "ممتاز! أنت ملم بموضوع الإجهاد الحراري"
+              : pct >= 50 ? "جيد! يمكنك المراجعة لتحسين نتيجتك"
+              : "تحتاج لمراجعة الموضوع أكثر";
+
+  questionCounter.textContent  = `${total} / ${total}`;
+  questionTitle.textContent    = "انتهى الاختبار!";
+  questionSubtitle.textContent = "إليك نتيجتك النهائية";
+  feedbackBox.className        = "feedback-box";
+  feedbackBox.textContent      = "";
+  remainingCounter.innerHTML   = "";
+  remainingCounter.className   = "remaining-counter";
+  btnContinue.style.display    = "none";
+
+  optionsContainer.innerHTML = `
+    <div class="end-screen">
+      <div class="end-emoji">${emoji}</div>
+      <div class="end-score">${score} / ${total}</div>
+      <div class="end-pct">${pct}%</div>
+      <p class="end-msg">${msg}</p>
+      <button class="btn-restart" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+    </div>
+  `;
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score           = 0;
+  loadQuestion(0);
+}
+
+// ===== BUTTON EVENTS =====
+
+btnContinue.addEventListener("click", () => {
+  if (!answered) {
+    feedbackBox.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً !";
+    feedbackBox.className = "feedback-box show warning";
+    optionsContainer.classList.add("shake");
+    setTimeout(() => optionsContainer.classList.remove("shake"), 500);
+    return;
+  }
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    loadQuestion(currentQuestion);
+  } else {
+    showEndScreen();
+  }
+});
+
+btnBack.addEventListener("click", () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion(currentQuestion);
+  }
+});
+
+// ===== INIT =====
+buildDots();
+startSlider();
+loadQuestion(0);
+  </script>
+</body>
+</html>

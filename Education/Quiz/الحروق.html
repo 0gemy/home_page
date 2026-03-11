@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>اختبار الحروق</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="quiz-wrapper">
+
+    <!-- Right Quiz Panel -->
+    <div class="quiz-panel">
+
+      <!-- Header: progress + counter -->
+      <div class="quiz-header">
+        <span class="question-counter" id="questionCounter">1 / 10</span>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Remaining Counter (shows after answering) -->
+      <div class="remaining-counter" id="remainingCounter"></div>
+
+      <!-- Question -->
+      <h1 class="question-title" id="questionTitle"></h1>
+      <p class="question-subtitle" id="questionSubtitle"></p>
+
+      <!-- Options -->
+      <div class="options-container" id="optionsContainer"></div>
+
+      <!-- Feedback -->
+      <div class="feedback-box" id="feedbackBox"></div>
+
+      <!-- Navigation Buttons -->
+      <div class="nav-buttons">
+        <button class="btn-continue" id="btnContinue">استمر</button>
+        <button class="btn-back" id="btnBack">الرجوع </button>
+      </div>
+
+    </div>
+
+    <!-- Left Image Panel -->
+    <div class="image-panel">
+      <div class="image-slider" id="imageSlider"></div>
+      <div class="image-overlay"></div>
+      <div class="dots-container" id="dotsContainer"></div>
+      <button class="back-site-btn" onclick="location.href='../Education.html'">← الرجوع للموقع</button>
+    </div>
+
+  </div>
+  <script>// ===== DATA =====
+
+const images = [
+  "img/download.jpg",
+  "img/First Aid At Home.jpg",
+  "img/Tu Paramédico Y Tu Personaje.jpg",
+];
+
+const questions = [
+  {
+    question: "ما المقصود بالحروق؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تلف في الجلد نتيجة الحرارة أو المواد الكيميائية",
+      "تمزق في العضلات",
+      "كسر في العظم",
+      "التهاب في المفصل"
+    ],
+    correct: 0,
+  },
+  {
+    question: "ما أول خطوة يجب القيام بها عند حدوث حرق؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "وضع ثلج مباشرة على الحرق",
+      "وضع معجون أسنان",
+      "تغطية الحرق فورًا",
+      "تبريد مكان الحرق بالماء الجاري",
+    ],
+    correct: 3,
+  },
+  {
+    question: "كم من الوقت يُنصح بتبريد الحرق بالماء؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "دقيقة واحدة",
+      "حوالي 10–20 دقيقة",
+      "ثانيتين",
+      "ساعة كاملة"
+    ],
+    correct: 1,
+  },
+  {
+    question: "ماذا يجب إزالته من المنطقة المصابة بالحرق إن أمكن؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "الجلد",
+      "الملابس أو الإكسسوارات الضيقة",
+      "الضمادة",
+      "الشعر"
+    ],
+    correct: 1,
+  },
+  {
+    question: "ماذا يجب تجنبه عند التعامل مع الحروق؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تبريد الحرق بالماء",
+      "تغطية الحرق بضمادة نظيفة",
+      "وضع مواد مثل الزيوت أو معجون الأسنان على الحرق",
+      "طلب المساعدة الطبية"
+    ],
+    correct: 2,
+  },
+  {
+    question: "بعد تبريد الحرق ماذا يجب فعله؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تركه مكشوفًا تمامًا",
+      "تغطيته بضمادة أو شاش نظيف",
+      "تدليك الجلد",
+      "وضع عطر"
+    ],
+    correct: 1,
+  },
+  {
+    question: "لماذا يتم تبريد الحرق بالماء؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "لتقليل الضرر والألم في الجلد",
+      "لتغيير لون الجلد",
+      "لتجفيف الجلد",
+      "لزيادة الحرارة"
+    ],
+    correct: 0,
+  },
+  {
+    question: "متى يجب طلب المساعدة الطبية؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "في جميع الحالات البسيطة فقط",
+      "إذا كان الحرق كبيرًا أو عميقًا",
+      "إذا كان الحرق صغيرًا جدًا",
+      "عند اختفاء الألم"
+    ],
+    correct: 1,
+  },
+  {
+    question: "ماذا يجب فعله إذا ظهرت فقاعات على الجلد؟",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "تركها وعدم فقعها",
+      "فتحها فورًا",
+      "إزالتها باليد",
+      "ضغطها"
+    ],
+    correct: 0,
+  },
+  {
+    question: "الهدف من الإسعافات الأولية للحروق هو:",
+    subtitle: "قم باختيار الاجابه الصحيحه",
+    options: [
+      "علاج الحرق نهائيًا",
+      "تغيير لون الجلد",
+      "تقليل الضرر وحماية الجلد حتى وصول العلاج الطبي",
+      "إزالة الألم فقط"
+    ],
+    correct: 2,
+  },
+];
+
+// ===== STATE =====
+let currentQuestion = 0;
+let answered        = false;
+let currentImg      = 0;
+let score           = 0;
+
+// ===== DOM REFS =====
+const imageSlider      = document.getElementById("imageSlider");
+const dotsContainer    = document.getElementById("dotsContainer");
+const progressBar      = document.getElementById("progressBar");
+const questionCounter  = document.getElementById("questionCounter");
+const questionTitle    = document.getElementById("questionTitle");
+const questionSubtitle = document.getElementById("questionSubtitle");
+const optionsContainer = document.getElementById("optionsContainer");
+const feedbackBox      = document.getElementById("feedbackBox");
+const remainingCounter = document.getElementById("remainingCounter");
+const btnContinue      = document.getElementById("btnContinue");
+const btnBack          = document.getElementById("btnBack");
+
+// ===== IMAGE SLIDER =====
+
+function buildDots() {
+  dotsContainer.innerHTML = "";
+  images.forEach((_, i) => {
+    const dot = document.createElement("div");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dotsContainer.appendChild(dot);
+  });
+}
+
+function updateImage() {
+  // fade out slowly (800ms)
+  imageSlider.style.transition = "opacity 0.8s ease";
+  imageSlider.style.opacity = "0";
+  setTimeout(() => {
+    imageSlider.style.backgroundImage = `url('${images[currentImg]}')`;
+    // fade in slowly (1000ms)
+    imageSlider.style.transition = "opacity 1s ease";
+    imageSlider.style.opacity = "1";
+    document.querySelectorAll(".dot").forEach((d, i) => {
+      d.classList.toggle("active", i === currentImg);
+    });
+  }, 800);
+}
+
+function startSlider() {
+  imageSlider.style.backgroundImage = `url('${images[0]}')`;
+  imageSlider.style.opacity = "1";
+  setInterval(() => {
+    currentImg = (currentImg + 1) % images.length;
+    updateImage();
+  }, 4000);
+}
+
+// ===== PROGRESS BAR =====
+function updateProgress(forceComplete) {
+  const pct = forceComplete
+    ? 100
+    : Math.round((currentQuestion / questions.length) * 100);
+  progressBar.style.width = pct + "%";
+}
+
+// ===== QUIZ =====
+
+function loadQuestion(index) {
+  const q = questions[index];
+  answered = false;
+
+  // counter & progress
+  questionCounter.textContent = `${index + 1} / ${questions.length}`;
+  updateProgress();
+
+  // titles
+  questionTitle.textContent    = q.question;
+  questionSubtitle.textContent = q.subtitle;
+
+  // clear feedback & remaining counter
+  feedbackBox.className   = "feedback-box";
+  feedbackBox.textContent = "";
+  remainingCounter.innerHTML = "";
+
+  // show continue btn if hidden
+  btnContinue.style.display = "";
+
+  // build options
+  optionsContainer.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn         = document.createElement("button");
+    btn.className     = "option-btn";
+    btn.dataset.idx   = i;
+    btn.innerHTML     = `<span class="option-text">${opt}</span><span class="option-icon"></span>`;
+    btn.addEventListener("click", () => handleAnswer(i));
+    optionsContainer.appendChild(btn);
+  });
+}
+
+function handleAnswer(selectedIdx) {
+  if (answered) return;
+  answered = true;
+
+  const q       = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option-btn");
+
+  if (selectedIdx === q.correct) score++;
+
+  buttons.forEach((btn, i) => {
+    btn.disabled   = true;
+    const icon     = btn.querySelector(".option-icon");
+
+    if (i === q.correct) {
+      btn.classList.add("correct");
+      icon.textContent = "✔";
+      icon.className   = "option-icon ok";
+    } else if (i === selectedIdx) {
+      btn.classList.add("wrong");
+      icon.textContent = "✖";
+      icon.className   = "option-icon bad";
+    } else {
+      btn.classList.add("dimmed");
+    }
+  });
+
+  // remaining questions (after answering current)
+  const remaining = questions.length - (currentQuestion + 1);
+
+  // update the dedicated remaining counter
+  if (remaining > 0) {
+    remainingCounter.innerHTML = `
+      <span class="rc-icon">📋</span>
+      تبقى <strong>${remaining}</strong> سؤال من أصل <strong>${questions.length}</strong>
+    `;
+    remainingCounter.className = "remaining-counter show";
+  } else {
+    remainingCounter.innerHTML = `<span class="rc-icon">🎯</span> هذا هو السؤال الأخير!`;
+    remainingCounter.className = "remaining-counter show last";
+  }
+
+  if (selectedIdx === q.correct) {
+    feedbackBox.innerHTML = `✔ إجابة صحيحة! أحسنت 🎉`;
+    feedbackBox.className = "feedback-box show success";
+  } else {
+    feedbackBox.innerHTML = `✖ إجابة خاطئة — الإجابة الصحيحة هي: <strong>${q.options[q.correct]}</strong>`;
+    feedbackBox.className = "feedback-box show error";
+  }
+}
+
+// ===== END SCREEN =====
+
+function showEndScreen() {
+  updateProgress(true);
+
+  const total = questions.length;
+  const pct   = Math.round((score / total) * 100);
+  const emoji = pct >= 80 ? "🏆" : pct >= 50 ? "👍" : "📚";
+  const msg   = pct >= 80 ? "ممتاز! أنت ملم بموضوع الحروق"
+              : pct >= 50 ? "جيد! يمكنك المراجعة لتحسين نتيجتك"
+              : "تحتاج لمراجعة الموضوع أكثر";
+
+  questionCounter.textContent  = `${total} / ${total}`;
+  questionTitle.textContent    = "انتهى الاختبار!";
+  questionSubtitle.textContent = "إليك نتيجتك النهائية";
+  feedbackBox.className        = "feedback-box";
+  feedbackBox.textContent      = "";
+  remainingCounter.innerHTML   = "";
+  remainingCounter.className   = "remaining-counter";
+  btnContinue.style.display    = "none";
+
+  optionsContainer.innerHTML = `
+    <div class="end-screen">
+      <div class="end-emoji">${emoji}</div>
+      <div class="end-score">${score} / ${total}</div>
+      <div class="end-pct">${pct}%</div>
+      <p class="end-msg">${msg}</p>
+      <button class="btn-restart" onclick="restartQuiz()">🔄 إعادة الاختبار</button>
+    </div>
+  `;
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score           = 0;
+  loadQuestion(0);
+}
+
+// ===== BUTTON EVENTS =====
+
+btnContinue.addEventListener("click", () => {
+  if (!answered) {
+    feedbackBox.innerHTML = "⚠️ الرجاء اختيار إجابة أولاً !";
+    feedbackBox.className = "feedback-box show warning";
+    optionsContainer.classList.add("shake");
+    setTimeout(() => optionsContainer.classList.remove("shake"), 500);
+    return;
+  }
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    loadQuestion(currentQuestion);
+  } else {
+    showEndScreen();
+  }
+});
+
+btnBack.addEventListener("click", () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion(currentQuestion);
+  }
+});
+
+// ===== INIT =====
+buildDots();
+startSlider();
+loadQuestion(0);
+</script>
+</body>
+</html>
