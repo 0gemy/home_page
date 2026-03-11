@@ -88,6 +88,24 @@
             infoBox.classList.add("visible");
         }
 
+        /* ── بحث تدريجي: 3 → 7 → 15 → 30 كم ── */
+        async function findNearestHospital(lat, lon) {
+            const radii = [3000, 7000, 15000, 30000];
+            for (var i = 0; i < radii.length; i++) {
+                var km = radii[i] / 1000;
+                showStatus("🔍 جاري البحث في نطاق " + km + " كم…", "loading");
+                var q = '[out:json];(node["amenity"~"hospital|clinic"](around:' +
+                        radii[i] + ',' + lat + ',' + lon + '););out body;';
+                var r = await fetch(
+                    "https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(q)
+                );
+                var d = await r.json();
+                if (d.elements && d.elements.length > 0) return d.elements[0];
+            }
+            return null;
+        }
+
+        /* ── رسم المسار عبر ORS ── */
         async function drawRoute(startLon, startLat, endLon, endLat) {
             const res = await fetch(
                 "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
@@ -139,19 +157,13 @@
                         .addTo(map).bindPopup("📍 موقعك الحالي").openPopup();
                     map.setView([lat, lon], 14);
 
-                    showStatus("🔍 جاري البحث عن أقرب مستشفى…", "loading");
-
-                    const query = '[out:json];(node["amenity"~"hospital|clinic"](around:5000,' +
-                                  lat + ',' + lon + '););out body;';
                     try {
-                        const r1   = await fetch("https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query));
-                        const data = await r1.json();
+                        const nearest = await findNearestHospital(lat, lon);
 
-                        if (data.elements && data.elements.length > 0) {
-                            const nearest = data.elements[0];
-                            const name    = (nearest.tags &&
-                                            (nearest.tags["name:ar"] || nearest.tags["name"]))
-                                            || "مستشفى / عيادة قريبة";
+                        if (nearest) {
+                            const name = (nearest.tags &&
+                                         (nearest.tags["name:ar"] || nearest.tags["name"]))
+                                         || "مستشفى / عيادة قريبة";
 
                             if (hospitalMarker) map.removeLayer(hospitalMarker);
                             hospitalMarker = L.marker([nearest.lat, nearest.lon], { icon: hospitalIcon })
@@ -163,12 +175,14 @@
                             showStatus("✅ أقرب مستشفى على بُعد " + distKm + " كم (~" + minutes + " دقيقة)", "success");
                             showInfo(name, distKm, minutes, lat, lon, nearest.lat, nearest.lon);
                         } else {
-                            showStatus("⚠️ لم يتم العثور على مستشفيات في نطاق 5 كم", "error");
+                            showStatus("⚠️ لم يتم العثور على مستشفيات في نطاق 30 كم", "error");
                         }
+
                     } catch (e) {
                         console.error("Map/Route Error:", e);
                         showStatus("❌ حدث خطأ، حاول مرة أخرى", "error");
                     }
+
                     findBtn.disabled = false;
                 },
                 function () {
