@@ -1,20 +1,23 @@
-(function() {
+/* ============================================================
+   Navbar
+   ============================================================ */
+(function () {
     function initNavbar() {
-        const menu = document.getElementById("navMenu");
-        const overlay = document.querySelector(".overlay");
+        const menu     = document.getElementById("navMenu");
+        const overlay  = document.querySelector(".overlay");
         const menuIcon = document.querySelector(".menu-icon");
 
         if (!menu) return;
-        window.toggleMenu = function() {
+
+        window.toggleMenu = function () {
             menu.classList.toggle("show");
             if (overlay) overlay.classList.toggle("show");
         };
-        
-        document.addEventListener("click", function(event) {
+
+        document.addEventListener("click", function (event) {
             if (menu.classList.contains("show")) {
                 const isClickInsideMenu = menu.contains(event.target);
-                const isClickOnIcon = menuIcon && menuIcon.contains(event.target);
-                
+                const isClickOnIcon    = menuIcon && menuIcon.contains(event.target);
                 if (!isClickInsideMenu && !isClickOnIcon) {
                     menu.classList.remove("show");
                     if (overlay) overlay.classList.remove("show");
@@ -32,7 +35,7 @@
 
 
 /* ============================================================
-   اقرب اسعاف
+   Map — أقرب مركز إسعاف
    ============================================================ */
 (function () {
     function initMap() {
@@ -50,7 +53,6 @@
         let hospitalMarker = null;
         let routeLayer     = null;
 
-        /* عناصر الخريطة  */
         const findBtn   = document.getElementById("findNearest");
         const statusBox = document.getElementById("mapStatus");
         const infoBox   = document.getElementById("hospitalInfo");
@@ -58,7 +60,6 @@
         const infoDist  = document.getElementById("hospitalDist");
         const infoLink  = document.getElementById("hospitalLink");
 
-        /* ── أيقونة المستشفى ── */
         const hospitalIcon = L.divIcon({
             className  : "",
             html       : '<div style="font-size:30px;line-height:1;filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))">🏥</div>',
@@ -79,15 +80,14 @@
             if (infoDist) infoDist.innerHTML   =
                 "🛣️ " + distKm + " كم &nbsp;|&nbsp; ⏱️ " + minutes + " دقيقة تقريباً";
             if (infoLink) {
-                infoLink.href = "https://www.google.com/maps/dir/" +
-                                userLat + "," + userLon + "/" +
-                                hosLat  + "," + hosLon;
+                infoLink.href   = "https://www.google.com/maps/dir/" +
+                                  userLat + "," + userLon + "/" +
+                                  hosLat  + "," + hosLon;
                 infoLink.target = "_blank";
             }
             infoBox.classList.add("visible");
         }
 
-        /* رسم طريق لاقرب مستشفى */
         async function drawRoute(startLon, startLat, endLon, endLat) {
             const res = await fetch(
                 "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
@@ -98,27 +98,17 @@
                         "Authorization": ORS_KEY
                     },
                     body: JSON.stringify({
-                        coordinates: [
-                            [startLon, startLat],
-                            [endLon,   endLat  ]
-                        ]
+                        coordinates: [[startLon, startLat], [endLon, endLat]]
                     })
                 }
             );
-
             if (!res.ok) throw new Error("ORS " + res.status);
             const data = await res.json();
 
             if (routeLayer) map.removeLayer(routeLayer);
             routeLayer = L.geoJSON(data, {
-                style: {
-                    color    : "#650101",
-                    weight   : 5,
-                    opacity  : 0.85,
-                    dashArray: "8, 4"
-                }
+                style: { color: "#650101", weight: 5, opacity: 0.85, dashArray: "8, 4" }
             }).addTo(map);
-
             map.fitBounds(routeLayer.getBounds(), { padding: [50, 50] });
 
             const seg     = data.features[0].properties.segments[0];
@@ -127,7 +117,6 @@
             return { distKm, minutes };
         }
 
-        /* ── الزر الرئيسي ── */
         if (!findBtn) return;
 
         findBtn.addEventListener("click", function () {
@@ -135,7 +124,6 @@
                 showStatus("❌ المتصفح لا يدعم تحديد الموقع", "error");
                 return;
             }
-
             findBtn.disabled = true;
             if (infoBox)    infoBox.classList.remove("visible");
             if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
@@ -146,26 +134,17 @@
                     const lat = pos.coords.latitude;
                     const lon = pos.coords.longitude;
 
-                    /* موقع المستخدم */
                     if (userMarker) map.removeLayer(userMarker);
                     userMarker = L.marker([lat, lon])
-                        .addTo(map)
-                        .bindPopup("📍 موقعك الحالي")
-                        .openPopup();
+                        .addTo(map).bindPopup("📍 موقعك الحالي").openPopup();
                     map.setView([lat, lon], 14);
 
                     showStatus("🔍 جاري البحث عن أقرب مستشفى…", "loading");
 
-                    /* Overpass API */
-                    const query =
-                        '[out:json];(node["amenity"~"hospital|clinic"](around:5000,' +
-                        lat + ',' + lon + '););out body;';
-
+                    const query = '[out:json];(node["amenity"~"hospital|clinic"](around:5000,' +
+                                  lat + ',' + lon + '););out body;';
                     try {
-                        const r1   = await fetch(
-                            "https://overpass-api.de/api/interpreter?data=" +
-                            encodeURIComponent(query)
-                        );
+                        const r1   = await fetch("https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query));
                         const data = await r1.json();
 
                         if (data.elements && data.elements.length > 0) {
@@ -174,35 +153,22 @@
                                             (nearest.tags["name:ar"] || nearest.tags["name"]))
                                             || "مستشفى / عيادة قريبة";
 
-                            /* ماركر المستشفى */
                             if (hospitalMarker) map.removeLayer(hospitalMarker);
                             hospitalMarker = L.marker([nearest.lat, nearest.lon], { icon: hospitalIcon })
-                                .addTo(map)
-                                .bindPopup("<b>" + name + "</b>")
-                                .openPopup();
+                                .addTo(map).bindPopup("<b>" + name + "</b>").openPopup();
 
                             showStatus("🗺️ جاري رسم المسار…", "loading");
+                            const { distKm, minutes } = await drawRoute(lon, lat, nearest.lon, nearest.lat);
 
-                            /*الطريق*/
-                            const { distKm, minutes } = await drawRoute(
-                                lon, lat, nearest.lon, nearest.lat
-                            );
-
-                            showStatus(
-                                "✅ أقرب مستشفى على بُعد " + distKm + " كم (~" + minutes + " دقيقة)",
-                                "success"
-                            );
+                            showStatus("✅ أقرب مستشفى على بُعد " + distKm + " كم (~" + minutes + " دقيقة)", "success");
                             showInfo(name, distKm, minutes, lat, lon, nearest.lat, nearest.lon);
-
                         } else {
                             showStatus("⚠️ لم يتم العثور على مستشفيات في نطاق 5 كم", "error");
                         }
-
                     } catch (e) {
                         console.error("Map/Route Error:", e);
                         showStatus("❌ حدث خطأ، حاول مرة أخرى", "error");
                     }
-
                     findBtn.disabled = false;
                 },
                 function () {
@@ -218,39 +184,42 @@
     } else {
         initMap();
     }
-})()
+})();
 
 
 /* ============================================================
+   Slider — اعرف خطاك
    ============================================================ */
-(function() {
+(function () {
     function initSlider() {
-        const slider = document.querySelector(".slider");
-        const slides = document.querySelectorAll(".slide");
+        const slider  = document.querySelector(".slider");
+        const slides  = document.querySelectorAll(".slide");
         const nextBtn = document.querySelector(".next");
         const prevBtn = document.querySelector(".prev");
 
         if (!slider || slides.length === 0) return;
 
-        let index = 0;
+        let sliderIndex = 0;
 
-        const update = () => {
-        
-            slider.style.transform = `translateX(-${index * 100}%)`;
-        };
+        function updateSlider() {
+            slider.style.transform = "translateX(-" + (sliderIndex * 100) + "%)";
+        }
 
-        if (nextBtn) nextBtn.addEventListener("click", () => {
-            index = (index + 1) % slides.length;
-            update();
-        });
+        if (nextBtn) {
+            nextBtn.addEventListener("click", function () {
+                sliderIndex = (sliderIndex + 1) % slides.length;
+                updateSlider();
+            });
+        }
 
-        if (prevBtn) prevBtn.addEventListener("click", () => {
-            index = (index - 1 + slides.length) % slides.length;
-            update();
-        });
-        
-        
-        update();
+        if (prevBtn) {
+            prevBtn.addEventListener("click", function () {
+                sliderIndex = (sliderIndex - 1 + slides.length) % slides.length;
+                updateSlider();
+            });
+        }
+
+        updateSlider();
     }
 
     if (document.readyState === "loading") {
@@ -259,36 +228,68 @@
         initSlider();
     }
 })();
-//=======================================
-const testimonials = [
-  " الدورات التعليمية بسيطة ومفهومة، وحسّستني إني أقدر أساعد غيري وقت الحاجة ",
-" الموقع ساعدني أفهم أتصرف إزاي في موقف طارئ بهدوء، والمعلومات كانت واضحة وسهلة",
-  " فكرة الموقع ممتازة وبتجمع كل المعلومات المهمة في مكان واحد بشكل منظم "
-];
 
-const avatars = document.querySelectorAll(".avatar");
-const message = document.getElementById("testimonialMessage");
-const next = document.getElementById("next");
-const prev = document.getElementById("prev");
 
-let index = 0;
+/* ============================================================
+   Testimonials — آراء العملاء
+   ============================================================ */
+(function () {
+    function initTestimonials() {
+        const testimonials = [
+            "الدورات التعليمية بسيطة ومفهومة، وحسّستني إني أقدر أساعد غيري وقت الحاجة",
+            "الموقع ساعدني أفهم أتصرف إزاي في موقف طارئ بهدوء، والمعلومات كانت واضحة وسهلة",
+            "فكرة الموقع ممتازة وبتجمع كل المعلومات المهمة في مكان واحد بشكل منظم"
+        ];
 
-function updateTestimonial(i) {
-  avatars.forEach(a => a.classList.remove("active"));
-  avatars[i].classList.add("active");
-  message.textContent = testimonials[i];
-}
+        const avatars = document.querySelectorAll(".avatar");
+        const message = document.getElementById("testimonialMessage");
+        const nextBtn = document.getElementById("next");
+        const prevBtn = document.getElementById("prev");
 
-next.onclick = () => {
-  index = (index + 1) % testimonials.length;
-  updateTestimonial(index);
-};
+        if (!message || !nextBtn || !prevBtn || avatars.length === 0) return;
 
-prev.onclick = () => {
-  index = (index - 1 + testimonials.length) % testimonials.length;
-  updateTestimonial(index);
-};
- document.querySelector(".ai-bot").addEventListener("click",() =>{
-  window.location.href="chat-ai-main/index.html";
+        let testimonialIndex = 0;
 
- });
+        function updateTestimonial(i) {
+            avatars.forEach(function (a) { a.classList.remove("active"); });
+            avatars[i].classList.add("active");
+            message.textContent = testimonials[i];
+        }
+
+        nextBtn.addEventListener("click", function () {
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            updateTestimonial(testimonialIndex);
+        });
+
+        prevBtn.addEventListener("click", function () {
+            testimonialIndex = (testimonialIndex - 1 + testimonials.length) % testimonials.length;
+            updateTestimonial(testimonialIndex);
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initTestimonials);
+    } else {
+        initTestimonials();
+    }
+})();
+
+
+/* ============================================================
+   AI Bot Button
+   ============================================================ */
+(function () {
+    function initAiBot() {
+        var btn = document.querySelector(".ai-bot");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+            window.location.href = "chat-ai-main/index.html";
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initAiBot);
+    } else {
+        initAiBot();
+    }
+})();
