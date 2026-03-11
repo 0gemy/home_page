@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+html{
+  scroll-behavior:smooth;
+}
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -888,13 +891,13 @@ transform: translateY(-3px);
 
 .social{
     display: flex;
+    gap: 20px;
 }
 .social i {
     font-size: 18px;
     margin: 0;
      padding: 0px;
     color:rgba(132, 160, 122, 1);
-    gap: 0px;
 }
  
 .links h3 {
