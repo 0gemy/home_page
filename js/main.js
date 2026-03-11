@@ -56,6 +56,7 @@
         const infoBox   = document.getElementById("hospitalInfo");
         const infoName  = document.getElementById("hospitalName");
         const infoDist  = document.getElementById("hospitalDist");
+        const infoLink  = document.getElementById("hospitalLink");
 
         /* ── أيقونة المستشفى ── */
         const hospitalIcon = L.divIcon({
@@ -72,11 +73,17 @@
             statusBox.className   = "map-status " + type;
         }
 
-        function showInfo(name, distKm, minutes) {
+        function showInfo(name, distKm, minutes, userLat, userLon, hosLat, hosLon) {
             if (!infoBox) return;
             if (infoName) infoName.textContent = "🏥 " + name;
             if (infoDist) infoDist.innerHTML   =
                 "🛣️ " + distKm + " كم &nbsp;|&nbsp; ⏱️ " + minutes + " دقيقة تقريباً";
+            if (infoLink) {
+                infoLink.href = "https://www.google.com/maps/dir/" +
+                                userLat + "," + userLon + "/" +
+                                hosLat  + "," + hosLon;
+                infoLink.target = "_blank";
+            }
             infoBox.classList.add("visible");
         }
 
@@ -185,7 +192,7 @@
                                 "✅ أقرب مستشفى على بُعد " + distKm + " كم (~" + minutes + " دقيقة)",
                                 "success"
                             );
-                            showInfo(name, distKm, minutes);
+                            showInfo(name, distKm, minutes, lat, lon, nearest.lat, nearest.lon);
 
                         } else {
                             showStatus("⚠️ لم يتم العثور على مستشفيات في نطاق 5 كم", "error");
