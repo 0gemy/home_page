@@ -1,4 +1,3 @@
-
 (function() {
     function initNavbar() {
         const menu = document.getElementById("navMenu");
@@ -33,42 +32,178 @@
 
 
 /* ============================================================
+   اقرب اسعاف
    ============================================================ */
-(function() {
+(function () {
     function initMap() {
         const mapContainer = document.getElementById("nc-map");
         if (!mapContainer) return;
 
-        let map = L.map('nc-map').setView([30.0444, 31.2357], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        const ORS_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjhjYjAwZmRkZGE3OTQyZWY5NDI3M2I2Y2YxNzk0ODA4IiwiaCI6Im11cm11cjY0In0=";
 
-        let userMarker, hospitalMarker;
-        const findBtn = document.getElementById("findNearest");
+        const map = L.map("nc-map").setView([30.0444, 31.2357], 13);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "© OpenStreetMap contributors"
+        }).addTo(map);
 
-        if (findBtn) {
-            findBtn.addEventListener("click", async () => {
-                if (!navigator.geolocation) return alert("المتصفح لا يدعم تحديد الموقع");
+        let userMarker     = null;
+        let hospitalMarker = null;
+        let routeLayer     = null;
 
-                navigator.geolocation.getCurrentPosition(async (pos) => {
-                    const { latitude: lat, longitude: lon } = pos.coords;
+        /* عناصر الخريطة  */
+        const findBtn   = document.getElementById("findNearest");
+        const statusBox = document.getElementById("mapStatus");
+        const infoBox   = document.getElementById("hospitalInfo");
+        const infoName  = document.getElementById("hospitalName");
+        const infoDist  = document.getElementById("hospitalDist");
 
+        /* ── أيقونة المستشفى ── */
+        const hospitalIcon = L.divIcon({
+            className  : "",
+            html       : '<div style="font-size:30px;line-height:1;filter:drop-shadow(0 2px 5px rgba(0,0,0,.4))">🏥</div>',
+            iconSize   : [34, 34],
+            iconAnchor : [17, 34],
+            popupAnchor: [0, -36]
+        });
+
+        function showStatus(msg, type) {
+            if (!statusBox) return;
+            statusBox.textContent = msg;
+            statusBox.className   = "map-status " + type;
+        }
+
+        function showInfo(name, distKm, minutes) {
+            if (!infoBox) return;
+            if (infoName) infoName.textContent = "🏥 " + name;
+            if (infoDist) infoDist.innerHTML   =
+                "🛣️ " + distKm + " كم &nbsp;|&nbsp; ⏱️ " + minutes + " دقيقة تقريباً";
+            infoBox.classList.add("visible");
+        }
+
+        /* رسم طريق لاقرب مستشفى */
+        async function drawRoute(startLon, startLat, endLon, endLat) {
+            const res = await fetch(
+                "https://api.openrouteservice.org/v2/directions/driving-car/geojson",
+                {
+                    method : "POST",
+                    headers: {
+                        "Content-Type" : "application/json",
+                        "Authorization": ORS_KEY
+                    },
+                    body: JSON.stringify({
+                        coordinates: [
+                            [startLon, startLat],
+                            [endLon,   endLat  ]
+                        ]
+                    })
+                }
+            );
+
+            if (!res.ok) throw new Error("ORS " + res.status);
+            const data = await res.json();
+
+            if (routeLayer) map.removeLayer(routeLayer);
+            routeLayer = L.geoJSON(data, {
+                style: {
+                    color    : "#650101",
+                    weight   : 5,
+                    opacity  : 0.85,
+                    dashArray: "8, 4"
+                }
+            }).addTo(map);
+
+            map.fitBounds(routeLayer.getBounds(), { padding: [50, 50] });
+
+            const seg     = data.features[0].properties.segments[0];
+            const distKm  = (seg.distance / 1000).toFixed(1);
+            const minutes = Math.ceil(seg.duration / 60);
+            return { distKm, minutes };
+        }
+
+        /* ── الزر الرئيسي ── */
+        if (!findBtn) return;
+
+        findBtn.addEventListener("click", function () {
+            if (!navigator.geolocation) {
+                showStatus("❌ المتصفح لا يدعم تحديد الموقع", "error");
+                return;
+            }
+
+            findBtn.disabled = true;
+            if (infoBox)    infoBox.classList.remove("visible");
+            if (routeLayer) { map.removeLayer(routeLayer); routeLayer = null; }
+            showStatus("⏳ جاري تحديد موقعك…", "loading");
+
+            navigator.geolocation.getCurrentPosition(
+                async function (pos) {
+                    const lat = pos.coords.latitude;
+                    const lon = pos.coords.longitude;
+
+                    /* موقع المستخدم */
                     if (userMarker) map.removeLayer(userMarker);
-                    userMarker = L.marker([lat, lon]).addTo(map).bindPopup("موقعك").openPopup();
+                    userMarker = L.marker([lat, lon])
+                        .addTo(map)
+                        .bindPopup("📍 موقعك الحالي")
+                        .openPopup();
                     map.setView([lat, lon], 14);
 
-                    const query = `[out:json];(node["amenity"~"hospital|clinic"](around:5000,${lat},${lon}););out body;`;
+                    showStatus("🔍 جاري البحث عن أقرب مستشفى…", "loading");
+
+                    /* Overpass API */
+                    const query =
+                        '[out:json];(node["amenity"~"hospital|clinic"](around:5000,' +
+                        lat + ',' + lon + '););out body;';
+
                     try {
-                        const res = await fetch("https://overpass-api.de/api/interpreter?data=" + encodeURIComponent(query));
-                        const data = await res.json();
-                        if (data.elements.length > 0) {
+                        const r1   = await fetch(
+                            "https://overpass-api.de/api/interpreter?data=" +
+                            encodeURIComponent(query)
+                        );
+                        const data = await r1.json();
+
+                        if (data.elements && data.elements.length > 0) {
                             const nearest = data.elements[0];
+                            const name    = (nearest.tags &&
+                                            (nearest.tags["name:ar"] || nearest.tags["name"]))
+                                            || "مستشفى / عيادة قريبة";
+
+                            /* ماركر المستشفى */
                             if (hospitalMarker) map.removeLayer(hospitalMarker);
-                            hospitalMarker = L.marker([nearest.lat, nearest.lon]).addTo(map).bindPopup("أقرب مركز إسعاف").openPopup();
+                            hospitalMarker = L.marker([nearest.lat, nearest.lon], { icon: hospitalIcon })
+                                .addTo(map)
+                                .bindPopup("<b>" + name + "</b>")
+                                .openPopup();
+
+                            showStatus("🗺️ جاري رسم المسار…", "loading");
+
+                            /*الطريق*/
+                            const { distKm, minutes } = await drawRoute(
+                                lon, lat, nearest.lon, nearest.lat
+                            );
+
+                            showStatus(
+                                "✅ أقرب مستشفى على بُعد " + distKm + " كم (~" + minutes + " دقيقة)",
+                                "success"
+                            );
+                            showInfo(name, distKm, minutes);
+
+                        } else {
+                            showStatus("⚠️ لم يتم العثور على مستشفيات في نطاق 5 كم", "error");
                         }
-                    } catch (e) { console.error("Map Error:", e); }
-                });
-            });
-        }
+
+                    } catch (e) {
+                        console.error("Map/Route Error:", e);
+                        showStatus("❌ حدث خطأ، حاول مرة أخرى", "error");
+                    }
+
+                    findBtn.disabled = false;
+                },
+                function () {
+                    showStatus("❌ تعذّر تحديد موقعك، تأكد من السماح بالوصول للموقع", "error");
+                    findBtn.disabled = false;
+                }
+            );
+        });
     }
 
     if (document.readyState === "loading") {
@@ -76,7 +211,7 @@
     } else {
         initMap();
     }
-})();
+})()
 
 
 /* ============================================================
