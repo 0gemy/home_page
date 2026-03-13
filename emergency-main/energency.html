@@ -1,465 +1,234 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head> 
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصحة والسلامة</title>
-    <link rel="icon" type="image/png" href="img/WhatsApp Image.jpeg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/wow.css">
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="emergency.css">
+        <link rel="icon" type="image/png" href="../img/WhatsApp Image.jpeg">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <title>emergency</title>
 </head>
+
 <body>
+ <nav class="navbar">
 
-<nav class="navbar">
-
+    <!-- RIGHT: Logo -->
     <div class="nav-right">
-      <a href="index.html">  <img src="img/WhatsApp Image.jpeg" alt="logo" class="logo-img"></a>
-        <a href="index.html" class="logo-text">الصحة والسلامة</a>
+      <a href="../index.html"><img src="../img/WhatsApp Image.jpeg" alt="logo" class="logo-img"></a>
+      <a href="../index.html" class="logo-text">الصحة والسلامة</a>
     </div>
 
+    <!-- CENTER: Links + search (desktop) -->
     <div class="nav-center" id="navMenu">
         <div class="close-btn" onclick="toggleMenu()">✕</div>
-        <a href="index.html">رئيسية</a>
-        <a href="emergency-main/energency.html">طوارئ</a>
-        <a href="Education/Education.html">تعلم</a>
-        <a href="chat-ai-main/index.html">مساعد ذكي</a>
+        <a href="../index.html">رئيسية</a>
+        <a href="energency.html">طوارئ</a>
+        <a href="../Education/Education.html">تعلم</a>
+        <a href="../chat-ai-main/index.html">مساعد ذكي</a>
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8b0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brain-svg"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+        <!-- Search box - desktop only -->
+        <div class="search-box desktop-search">
+            <input type="text" id="searchInput" class="search-normal" placeholder="بحث">
+            <i class="fa-solid fa-magnifying-glass" onclick="searchSection()"></i>
+        </div>
+        <!-- Auth buttons inside sidebar - mobile only -->
+        <div class="sidebar-auth">
+            <a href="../login-page-main/login.html" class="btn-login">تسجيل دخول</a>
+            <a href="../login-page-main/signup.html" class="btn-register">إنشاء حساب</a>
+        </div>
     </div>
+
+    <!-- LEFT: Auth buttons (desktop) + search icon (mobile) + hamburger -->
     <div class="nav-left">
-        <a  href="login-page-main/login.html" class="btn-login" >تسجيل دخول</a>
-        <a  href="login-page-main/signup.html" class="btn-register">إنشاء حساب</a>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-      
-      </div>
-    </nav>
-    <div class="overlay" onclick="toggleMenu()"></div>
-
-<!--start header-->
-<header class="header-home">
-    <div class="img-header">
-        <img src="img/Rectangle 2.png" alt="">
-    </div> 
-
-    <div class="header-content"> 
-        <h1>وعيك الطبي <br><span> مُنقذ حياتك </span></h1>
-
-        <p>
-            محتوى موثوق دعم<br>
-            خدمات ذكية تساعدك في اللحظة المهمة 
-        </p>
-
-        <button class="ai-bot" >
-            اسأل المساعد الذكي
-            <img src="img/timer-start.png" alt="">
+        <a href="../login-page-main/login.html" class="btn-login desktop-auth">تسجيل دخول</a>
+        <a href="../login-page-main/signup.html" class="btn-register desktop-auth">إنشاء حساب</a>
+        <!-- Search icon - mobile only, next to logo area -->
+        <button class="search-icon-btn" onclick="toggleMobileSearch()" aria-label="بحث">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </div>
-</header>
-<!--End header home-->
 
+ </nav>
 
+ <!-- Overlay -->
+ <div class="overlay" onclick="toggleMenu()"></div>
 
-<section class="services">
-  <div class="container">
+ <!-- Mobile search bar (drops below navbar) -->
+ <div class="mobile-search-bar" id="mobileSearchBar">
+   <input type="text" id="mobileSearchInput" placeholder="ابحث عن حالة طوارئ..." />
+   <button onclick="runMobileSearch()"><i class="fa-solid fa-magnifying-glass"></i></button>
+ </div>
 
-    <h2 class="title-services wow animate__backInRight  animate__slow">
-    كل الي <span>تحتاجه لسلامتك</span>
-    </h2>
-
-    <p class="title2">
-      نوفر لك مجموعة من الخدمات الصحية التوعوية<br>
-      التي تدعمك في الحالات الطارئة والتعليمية
-    </p>
-
-    <div class="cards">
-        
-        <div class="card">
-            <div class="icon">
-                <img src="img/book.png" alt="">
-            </div>
-            <p>
-                نصائح وإرشادات طبية معتمدة<br>
-                وموثوقة علميًا
-            </p>
-        </div>
-        
-        <div class="card">
-            <div class="icon">
-                <img src="img/shield-tick.png" alt="">
-            </div>
-            <p>
-          حماية بيانات المستخدمين<br>
-          وخصوصيتهم مضمونة
+    <section class="hero">
+      <div class="main">
+        <h1> ثواني بتفرق...خليك مستعد</h1>
+        <div class="box">
+            <p>في لحظات الخطر التصرف السريع ممكن ينقذ حياة<br>
+            مهم تعرف ازاي تتعامل مع الحالات الطارئه لحد ما توصل المساعدة الطيبه
         </p>
-    </div>
-        <div class="card">
-            <div class="icon">
-                <img src="img/note-2.png" alt="">
-            </div>
-            <p>
-                محتوى تعليمي موثوق لتعليم<br>
-                الإسعافات الأولية للأطفال والكبار
-            </p>
         </div>
-        
-    
-          <div class="card">
-            <div class="icon">
-              <img src="img/truck-time.png" >
-            </div>
-            <p>
-              استجابة سريعة مع أرقام الإسعاف<br>
-              الحقيقة والمستشفيات القريبة
-            </p>
-          </div>
-
+      </div>
+    </section>
+    <section class="counter">
+        <div class="number">
+            <div class="num1" data-target="60">0%</div>
+            <p>حالات تعتمد <br>  علي سرعة التدخل </p>
+        </div>
+          <div class="number">
+            <div class="num1" data-target="123">123</div>
+            <p>رقم الإسعاف في<br> حالات الطوارئ</p>
+        </div>
+          <div class="number">
+            <div class="num1" data-target="70">0%</div>
+         <p>من الاصابات يمكن <br>  إسعافها مبدئيا </p>
+        </div>
+    </section>
+    <section class="burn" id="burns">
+      <div class="container">
+    <div class="burn-text">
+      <h2>طوارئ الحروق </h2>
+      <p>لتعامل السريع والهادئ مع الحروق يقلل 
+        <br>
+من خطورتها ويحمي المصاب </p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>أبعد المصاب عن مصدر الحرارة </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>برد مكان الحرق بمياه جارية فاترة لمدة 10-20 دقيقة </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>أزل أي إكسسوارات أو ملابس ضيقة حول الحرق </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>غطِّ الحرق بشاش طبي نظيف  </li>
+      </ul>
+    </div>
+<div class="images">
+     <img src="./image/image2.jpg" class="ima1">
+      <img src="./image/image3.jpg " class="ima2">
     </div>
   </div>
 </section>
-<section class="next-section">
-  <div class="next-container">
-
-    <div class="learn-right">
-      <h2>
-        تعلم الإسعافات الأولية بسهولة <br>وثقة <span>لتكون مستعدًا</span>دائمًا
-      </h2>
-
-      <div class="learn-buttons">
-        <a href="Education/Education.html" class="btn btn-primary">ابدأ التعلم الآن</a>
-        <a href="emergency-main/emergency.html" class="btn btn-outline">اطلع على أبرز النصائح</a>
-      </div>
+ <section class="suffocation">
+      <div class="container">
+        <div class="images">
+     <img src="./image/image4.jpg" class="ima3">
+      <img src="./image/image6.jpg " class="ima4">
     </div>
-    <div class="learn-left">
-      <p>
-        فيديوهات ودورات لجميع الأعمار تساعدك على تعلم الإسعافات الأولية
-        بطريقة سهلة وسريعة، وتجعلك جاهزًا للتصرف بثقة في أي حالة طارئة.
-      </p>
+    <div class="burn-text" id="choking">
+      <h2>الإختناق </h2>
+      <p>يحدث عند إنسداد مجرى التنفس بجسم غريب </p>
+   <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>اطلب من المصاب يرفع يده </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>تأكد إن مجري التنفس مفتوح </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لا تحاول تدخل إيدك في الفم </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لو فقد الوعي ,إبدأ الإنعاش القلبي الرئوى </li>
+      </ul>
+    </div>
+      </div>
+</section>
+<section class="burn" id="heart">
+      <div class="container">
+    <div class="burn-text">
+      <h2>السكتة القلبية </h2>
+      <p> تحدث عند توقف القلب عن ضخ الدم <br>,وهي حالة طوارئ تستدعي التدخل الفوري</p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>تأكد أن المصاب غير واعي ولا يتنفس </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>إبدأ الإنعاش القلبي الرئوي (ضغطات علي الصدر)</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>إستخدام جهاز الصدمات القلبية إن وجد </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>إستمر حتي وصول المساعدة  </li>
+      </ul>
+    </div>
+<div class="images">
+     <img src="./image/image5.jpg" class="ima1">
+      <img src="./image/image7.jpg " class="ima2">
     </div>
   </div>
 </section>
-
-<section class="video-section">
-  <div class="video">
-<video  controls width="400" autoplay muted loop>
-  <source  src="img/vid89750_2026-02-22-04-17.mp4" type="video/mp4">
-</video>
-
+<section class="suffocation">
+      <div class="container">
+        <div class="images">
+     <img src="./image/bleed1.jpg" class="ima3">
+      <img src="./image/bleed2.jpg " class="ima4">
+    </div>
+     <div class="burn-text" id="bleeding">
+      <h2>النزيف</h2>
+      <p>يحدث عند فقدان الدم نتيجة جرح او اصابة</p>
+   <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>اضغط مباشرا علي الجرح بقطعة قماش نظيفة </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ارفع الجزء المصاب ان امكن</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لا تزيل الجسم الغريب اذا كان داخل الجرح</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>اربط الضمادة باحكام</li>
+      </ul>
+    </div>
+      </div>
+</section>
+<section class="burn">
+      <div class="container">
+    <div class="burn-text" id="piosin">
+      <h2>التسمم</h2>
+      <p> يحدث عند ابتلاع ماده ضاره او استنشاقها</p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>تاكد من وعي المصاب وتنفسه</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لاتجبره علي القىء</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ابعده عن اي ماده سامه من حوله </li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>احتفظ بعبوه الماده ان وجدت </li>
+      </ul>
+    </div>
+<div class="images">
+     <img src="./image/piosin 1.jpg" class="ima1">
+      <img src="./image/piosin2.jpg " class="ima2">
+    </div>
   </div>
 </section>
-<!--End video-->
-<div class="assistant-section">
-
-    <h2 class="assistant-title wow animate__bounceInDown animate__slow">
-      مساعد ذكي يرشدك وقت الطوارئ
-    </h2>
-
-    <div class="assistant-content">
-      <div class="assistant-text">
-
-        <div class="feature">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
-</svg>
-
-         
-          <p>
-            يجيب على أسئلتك الصحية بسرعة ووضوح ويوفر إرشادات
-            فورية للتعامل مع الحالات الطارئة الشائعة
-          </p>
-        </div>
-
-        <div class="feature">
-          <img src="img/brain2.png" alt="">
-          <p>
-            إرشادات مبسطة تناسب جميع الأعمار يشرح الخطوات
-            بطريقة سهلة للكبار والأطفال بدون تعقيد
-          </p>
-        </div>
-
-        <div class="feature">
-          <img src="img/convert-3d-cube.png" alt="">
-          <p>
-            متاح في أي وقت ومن أي مكان يساعدك حتى قبل وصول
-            الإسعاف أو التوجه لأقرب مركز
-          </p>
-        </div>
-
-        <div class="feature">
-          <img src="img/shield-tick.png" alt="">
-          <p>
-            مبني على مصادر طبية موثوقة يعتمد على إرشادات
-            معتمدة في الإسعافات الأولية والتوعية الصحية
-          </p>
-        </div>
-      </div>
-         <div class="assistant-image">
-        <img src="img/Screenshot 2026-01-26 052806 1.png" alt="assistant">
-      </div>
+<section class="suffocation">
+      <div class="container">
+        <div class="images">
+     <img src="./image/break1.jpg" class="ima3">
+      <img src="./image/break2.jpg " class="ima4">
     </div>
-
-</div>
-<!--===========================Map================================-->
-
-<section class="nearest-center">
-
-  <h2 class="nc-title">أقرب مركز</h2>
-  <p class="nc-subtitle">
-    كل دقيقة بتفرق اعرف  <span>أقرب مركز بسرعة</span>
-  </p>
-
-  <!-- الخريطة الحقيقية -->
-  <div class="map-status hidden" id="mapStatus"></div>
-  <div id="nc-map"></div>
-  <div class="hospital-info" id="hospitalInfo">
-    <h4 id="hospitalName">🏥 اسم المستشفى</h4>
-    <p id="hospitalDist"></p>
-    <a id="hospitalLink" href="#" target="_blank">🗺️ افتح الاتجاهات في Google Maps</a>
-  </div>
-  <div class="nc-cards">
-     <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/location-tick.png" alt="">
-        <h3>أقرب مركز إسعاف</h3>
-      </div>
-      <p>
-     كل دقيقه بتفرق اعرف اقرب مركز بسرعه
-      </p>
-      <button id="findNearest" class="click-mab">عرض على الخريطة</button>
+     <div class="burn-text" id="fractures">
+      <h2>الكسور </h2>
+      <p>يحدث عند تعرض العظام لصدمة قوية او سقوط مفاجئ</p>
+   <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ثبت الجزء المصاب ولا تحركه</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لا تحاول اعادة العظام لمكانه</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ضع كمادات باردة لتقليل التورم</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ارفع الجزء المصاب ان امكن</li>
+      </ul>
     </div>
-    <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/brain-svgrepo-com.png" alt="">
-        <h3>مساعد الإسعاف الذكي</h3>
       </div>
-      <p>
-        مساعد ذكي يقدم إرشادات أولية
-        ونصائح فورية.
-      </p>
-      <a href="chat-ai-main/index.html" class="click-mab">ابدأ المحادثة</a>
-    </div>  
-    
-    <div class="nc-card">
-      <div class="nc-icon">
-        <img src="img/phone-receiver-telephone-svgrepo-com.png" alt="">
-        <h3>التواصل مع الإسعاف</h3>
-      </div>
-      <p>
-        وفرنا لك وسائل التواصل الرسمية
-        مع خدمات الإسعاف.
-      </p>
-      <a href="tel:123" class="click-mab">اتصال مباشر بالإسعاف</a>
-
-    </div>
-  
-   
-  </div>
-
 </section>
-<!--============================End mab=======================-->
-
-
-<!--=======================saidbar=======================-->
-<section class="revision-section">
-  <div class="slider">
-    <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-   
-      <h2 class="revision-title" >اخطاء شائعه لازم تعرفها</h2>
-      <div class="revision-card revision-top">
-        <p class="card-text" id="badge-false">الخطأ ✕</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <p class="card-text" id="badge-true" >الصح ✓</p>
-      </div>
+<section class="burn">
+      <div class="container">
+    <div class="burn-text" id="amputation">
+      <h2>البتر</h2>
+      <p> يحدث عند انفصال جزء من الجسم نتيجة حادث خطير </p>
+  <h4>اتبع هذه <span class="light">الخطوات بسرعه</span></h4>
+  <ul>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>اوقف النزيف بالضغط المباشر</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>لف الجزء المبتور بقطعة شاش نظيفة</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ضع الجزء في كيس نظيف محكم الغلق</li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13L10 16L17 9M11 20L14 23L21 16" stroke="#4a1a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ضع الكيس داخل كيس اخر به ثلج (بدون ملامسة مباشرة)</li>
+      </ul>
     </div>
-    <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      <div class="revision-card revision-top">
-        <span class="badge wrong ">الخطأ ✕</span>
-        <p class="card-text">وضع بن على الجروح لوقف النزيف</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يسيب عدوي و يصعب تنظيف الجرح لو احتاج غرز الافضل تنظيف الجرح بشاش و الضغط عليه</p>
-      </div>
+<div class="images">
+     <img src="./image/amputation1.jpg" class="ima1">
+      <img src="./image/amputation2.jpg" class="ima2">
     </div>
-     <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">سحب جسم او الة من داخل الجسم</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">تحريكه ممكن يعرضه لنزيف خطير او تفاقم الاصابه فالافضل ماتسحبهوش ولو خرج ماترجعهوش و تطلب تدخل المختصين</p>
-      </div>
-    </div>
-       <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">وضع معجون سنان علي الحروق</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">تبريد مكان الحرق بماء فاتر جارٍ لبضع دقائق ثم تغطيته بضمادة نظيفة</p>
-      </div>
-    </div>
-    
-       <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">تحريك شخص بعد حادث</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge right">الصح ✓</span>
-        <p class="card-text">ممكن يفاقم الاصابه او الكسر الافضل عدم تحريكه و ثباته لحين تدخل المختصين و تقديم الاجراء المناسب</p>
-      </div>
-    </div>
-           <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">فرك العين لازالة جسم غريب</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يؤدي لضرر اكبر في عينك.. الافضل غسلها بمياه نظيفه لمده 15 دقيقه لخروج الجسم ولو لسه موجود الالم مستمر زور الدكتور.</p>
-      </div>
-    </div>
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">ربط منطقة نزيف الجرح الشديد</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يؤدي لتلف الانسجه و البتر. الافضل ماتلجأش للطريقه دي الا كملاذ اخير بحالات النزيف الشديد اللي مابيقفش بالضغط عليه</p>
-      </div>
-    </div>
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">ربط منطقه لدغه الثعبان</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">ممكن يسبب ضرر شديد نتيجه تجمع السم بمنطقه واحده الافضل ثبات الجزء المصاب لمنع انتشار السم لحين التدخل بالمضاد المناسب</p>
-      </div>
+  </div>
+</section>
+    <div class="notwait">
+      <h4> الطوارئ <span class="light">لاتنتظر </span></h4>
+      <p>كل ثانية قيمة وقت الطوارئ المعرفة الصحيحة قد <br> تنقذ حياة قبل وصول الإسعاف </p>
+      <video class="my-video" controls>
+        <source src="video_2026-02-21_23-58-47.mp4" type="video/mp4">
+      </video>
     </div>
    
-               <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">وضع معجون سنان علي الحروق</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text"> تبريد مكان الحرق بماء فاتر جارٍ
- لبضع دقائق ثم تغطيته بضمادة نظيفة</p>
-      </div>
-    </div>
-     <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text"> الإفراط في استخدام معطرات الجو والروائح الصناعية داخل الغرف المغلقة</p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text">استخدام المعطرات والمنظفات بكميات معتدلة مع تهوية المكان جيدًا لتقليل استنشاق المواد الكيميائية</p>
-      </div>
-    </div>
-         <div class="slide" style="background-image:url('img/Rectanglegggg.png')">
-      
-      <div class="revision-card revision-top">
-        <span class="badge wrong">الخطأ ✕</span>
-        <p class="card-text">خلط الكلور مع الأمونيا أو أي منظف آخر (مثل بعض منظفات الدهون والارضيات ) </p>
-      </div>
-      <div class="revision-card revision-bottom">
-        <span class="badge correct">الصح ✓</span>
-        <p class="card-text"> عدم خلط الكلور مع أي مواد أخرى لأن ذلك قد ينتج غازات سامة خطيرة على الجهاز التنفسي</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="slider-controls">
-    <button  class="arrow prev">❮</button>
-    <button id="next1" class="arrow next">❮</button>
-  </div>
-</section>
-
-<!--==============================================-->
-<section class="testimonials">
-  <div class="bg-circle"></div> 
-  
-  <div class="container">
-    
-    <div class="testimonials-box">
-      <!-- العنوان -->
-      <div class="title">
-        <h2>آراء العملاء</h2>
-        <hr class="line">
-      </div>
-
-      <!-- المحتوى -->
-      <div class="content">
-
-     
-
-        <!-- النص -->
-        <div class="testimonial-text">
-          <p id="testimonialMessage">
-            الموقع ساعدني أفهم أتصرف إزاي في موقف طارئ بهدوء،
-            والمعلومات كانت واضحة وسهلة
-          </p>
-        </div>
-         <div class="curve"></div>
-           <!-- صور العملاء -->
-        <div class="avatars">
-          <div class="avatar" data-index="1">
-            <span class="name">Said Ahmed</span>
-            <img src="img/a_user01_avatar.png" alt="">
-          </div>
-          <div class="avatar active" data-index="0">
-            <span class="name">Ahmed kamel</span>
-            <img src="img/a_user03_avatar.png" alt="">
-          </div>
-          
-          
-          <div class="avatar" data-index="2">
-            <span class="name">Nouran Mohamed</sp>
-        
-            <img src="img/a_user02_avatar.png" alt="">
-          </div>
-        </div>
-
-      </div>
-
-      <!-- الأسهم -->
-      <div class="arrows">
-        <button id="prev">❮</button>
-        <button id="next">❮</button>
-      </div>
-
-    </div>
-  </div>
-</section>
-<section class="sources">
-<h1>تم إعداد المحتوى بناءً على مصادر طبية رسمية ومعتمدة</h1>
-<div class="img-sources">
-<img src="img/logo 1.png" alt="">
-<img src="img/Screenshot 2026-01-29 025149 1.png" alt="">
-<img src="img/Emblem_of_the_ICRC.svg 1.png" alt="">
-</div>
-</section>
-<footer class="footer">
+    <footer class="footer">
       <div class="contain">
         <div class="foryou">
           <h2>من أجلك</h2>
@@ -473,9 +242,9 @@
       <div class="links">
         <h3>الروابط السريعة </h3>
         <ul>
-        <li><a href="index.html">الرئيسية</a></li>
-        <li><a href="emergency-main/emergency.html">الطوارئ</a></li>
-        <li><a href="Education/Education.html">تعلم</a></li>
+        <li><a href="">الرئيسية</a></li>
+        <li><a href="">الطوارئ</a></li>
+        <li><a href="">نصائح</a></li>
         <li><a href="">تواصل معنا </a></li>
         </ul>
       </div>
@@ -485,23 +254,12 @@
          <p>الشرطة: 122</p>
          <p>المطافي: 180</p>
         </div>
-          </div>
+      </div>
        <div class="copyright">
-        <p>© 2026 الصحة والسلامة</p>
-        </div>
-
-    
+        <p>© 2026 منقذك</p>
+       </div>
     </footer>
 
-
-
-
-    <script src="js/wow.min.js"></script>
-        <script src="js/wow.min.js"></script>
-              <script>
-              new WOW().init();
-              </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="js/main.js"></script>
 </body>
+<script src="emergency.js"></script>
 </html>
