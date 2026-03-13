@@ -2,8 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول</title>
+        <link rel="icon" type="image/png" href="../img/WhatsApp Image.jpeg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -18,54 +19,52 @@
                     <span></span>
                     <span></span>
                 </div>
-                <a class="back-btn" href="../index.html">→ الرجوع للموقع </a>
+                <a class="back-btn" href="../index.html">→ الرجوع للموقع</a>
             </div>
-    </div>
-    <div class="right">
-    <h1>تسجيل دخول <br> إلي حسابك</h1>
-    <form>
-        <label>البريد الإلكتروني</label>
-        <input type="email" placeholder="ادخل البريد الإلكتروني" required>
-        <label>كلمة المرور</label>
-        <div class="password-container">
-            <input type="password" placeholder="ادخل كلمة المرور" id="password">
-                <i class="fa-regular fa-eye eye" onclick="togglePassword()"></i>
         </div>
-        <div class="options">
-<label class="remember">
-    <input type="checkbox">
-    حفظ كلمة المرور
-</label>
-<a href="#" class="forgot">نسيت كلمة المرور؟</a>
+        <div class="right">
+            <h1>تسجيل دخول <br> إلي حسابك</h1>
+            <form>
+                <label>البريد الإلكتروني</label>
+                <input type="email" placeholder="ادخل البريد الإلكتروني" required>
+                <label>كلمة المرور</label>
+                <div class="password-container">
+                    <input type="password" placeholder="ادخل كلمة المرور" id="password">
+                    <i class="fa-regular fa-eye eye" onclick="togglePassword()"></i>
+                </div>
+                <div class="options">
+                    <label class="remember">
+                        <input type="checkbox">
+                        حفظ كلمة المرور
+                    </label>
+                    <a href="#" class="forgot">نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit">تسجيل الدخول</button>
+                <div class="divider">
+                    <span></span>
+                    أو سجل لدي
+                    <span></span>
+                </div>
+                <button class="google">
+                    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png">
+                    المتابعة باستخدام Google
+                </button>
+                <button class="facebook">
+                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
+                    المتابعة باستخدام Facebook
+                </button>
+            </form>
         </div>
-        <button type="submit">تسجيل الدخول</button>
-        <div class="divider">
-            <span></span>
-            أو سجل لدي
-            <span></span>
-        </div>
-        <button class="google">
-    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png">
-    المتابعة باستخدام Google
-</button>
-
-<button class="facebook">
-    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
-    المتابعة باستخدام Facebook
-</button>
-    </form>
-    </div>
     </div>
     <script>
-function togglePassword() {
-    var pass = document.getElementById("password");
-    if (pass.type === "password") {
-        pass.type = "text";
-    } else {
-        pass.type = "password";
-    }
-}
-</script>
+        function togglePassword() {
+            var pass = document.getElementById("password");
+            if (pass.type === "password") {
+                pass.type = "text";
+            } else {
+                pass.type = "password";
+            }
+        }
+    </script>
 </body>
-
 </html>
