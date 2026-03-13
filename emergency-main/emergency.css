@@ -552,7 +552,7 @@ justify-content: center;
   }
 }
 
-/* ===== MOBILE NAVBAR RESPONSIVE ===== */
+
 
 /* Overlay */
 .overlay {
@@ -566,7 +566,6 @@ justify-content: center;
   display: block;
 }
 
-/* Search icon button — hidden on desktop, shown on mobile */
 .search-icon-btn {
   display: none;
   background: none;
@@ -584,36 +583,35 @@ justify-content: center;
   display: none;
 }
 
-/* ---- DESKTOP (> 900px): search box & auth buttons visible normally ---- */
+
 .desktop-search { display: flex; }
 .desktop-auth   { display: inline-block; }
 
-/* ---- MOBILE (≤ 900px) ---- */
+
 @media (max-width: 900px) {
 
-  /* Show hamburger */
+
   .menu-icon {
     display: block;
   }
 
-  /* Show search icon in navbar (next to logo) */
+  
   .search-icon-btn {
     display: flex;
   }
 
-  /* Hide desktop-only elements */
   .desktop-search {
     display: none !important;
   }
   .desktop-auth {
     display: none !important;
   }
-  /* Hide brain SVG from nav-center on mobile */
+
   .nav-center .brain-svg {
     display: none;
   }
 
-  /* Sidebar panel */
+
   .nav-center {
     position: fixed;
     top: 0;
@@ -630,7 +628,9 @@ justify-content: center;
     box-shadow: -4px 0 20px rgba(0,0,0,0.15);
     overflow-y: auto;
   }
-
+.nav-center a :hover{
+    color: #fff;
+}
   .nav-center.show {
     right: 0;
   }
@@ -643,15 +643,23 @@ justify-content: center;
     left: 20px;
   }
 
-  /* Nav links inside sidebar */
+ .nav-center{
+    background-color: #7a0000;
+    
+ }
   .nav-center a {
+color: #fff;
     font-size: 18px;
     padding: 14px 0;
     border-bottom: 1px solid #f0f0f0;
     width: 100%;
     text-align: right;
   }
-
+ .nav-center.show a:hover{
+        color: #ffffff;
+    opacity: 0.8;
+    text-decoration: none;
+ }
   /* Auth buttons inside sidebar */
   .sidebar-auth {
     display: flex;
@@ -660,7 +668,7 @@ justify-content: center;
     width: 100%;
     margin-top: 24px;
     padding-top: 16px;
-    border-top: 2px solid #f0f0f0;
+ 
   }
 
   .sidebar-auth .btn-login,
@@ -673,7 +681,7 @@ justify-content: center;
   }
 }
 
-/* ---- SMALL MOBILE (≤ 500px) ---- */
+
 @media (max-width: 500px) {
   .navbar {
     padding: 10px 14px;
@@ -683,13 +691,13 @@ justify-content: center;
   }
 }
 
-/* Mobile search bar (drops below navbar on icon click) */
+
 .mobile-search-bar {
   display: none;
   width: 100%;
   padding: 10px 16px;
   background: #fff;
-  border-bottom: 1px solid #c9c9c9;
+ 
   z-index: 9999997;
   gap: 8px;
 }
