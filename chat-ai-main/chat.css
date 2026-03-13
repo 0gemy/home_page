@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 body{
     background-color:rgba(110, 6, 6, 1);
     padding: 30px;
@@ -23,6 +24,10 @@ body{
     text-decoration: none;
     color: #fff;
     font-size: 18px;
+}
+.top img {
+    width: 40px;
+    height: 40px;
 }
 .card{
     margin-top: 60px;
