@@ -203,6 +203,7 @@ transform: translateY(-3px);
   font-weight: 400;
   margin-bottom: 10px;
   text-align: center;
+
 }
 
 .title-services span {
@@ -450,7 +451,7 @@ transform: translateY(-3px);
 }
 #nc-map:hover { box-shadow: 0 12px 40px rgba(0,0,0,.18); }
 
-/* ── شريط الحالة ── */
+
 .map-status {
   max-width: 540px;
   margin: 0 auto 18px;
@@ -465,7 +466,7 @@ transform: translateY(-3px);
 .map-status.success { background: #e8f5e9; color: #1b5e20; border: 1px solid #84a07a; }
 .map-status.error   { background: #fdecea; color: #7a0000; border: 1px solid #e57373; }
 
-/* ── كارد نتيجة المستشفى ── */
+
 .hospital-info {
   display: none;
   max-width: 540px;
@@ -999,6 +1000,8 @@ justify-content: center;
   }
 
   .nav-center.show a {
+    width: 100%;
+     border-bottom: 1px solid #f0f0f0;
     color: #ffffff;
   }
 
