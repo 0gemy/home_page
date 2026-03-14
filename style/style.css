@@ -6,9 +6,7 @@ html{
 }
 body {
   margin: 0;
- font-family: "Cairo", sans-serif;
-  font-weight: 400;
-
+  font-family: "Inter", sans-serif;
 
 }
 
@@ -126,37 +124,6 @@ transform: translateY(-3px);
 }
 /* end navbar */
 
-/* ===== إصلاح تراص عناصر النافبار على الشاشات المتوسطة ===== */
-@media (max-width: 1100px) {
-  .logo-text {
-    font-size: 28px;
-  }
-  .nav-center {
-    gap: 20px;
-  }
-  .nav-center a {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 900px) {
-  .logo-text {
-    font-size: 22px;
-  }
-  .nav-center {
-    gap: 14px;
-  }
-  .nav-center a {
-    font-size: 14px;
-  }
-  .btn-login,
-  .btn-register {
-    font-size: 12px;
-    padding: 5px 12px;
-  }
-}
-/* ===================================================== */
-
 /*Start header-home*/
 .header-home {
   position: relative;
@@ -164,7 +131,6 @@ transform: translateY(-3px);
   border-radius: 20px 0 0 0;
   overflow: hidden;
   background-color: #650101;
-  margin-top: 70px; /* يعوض ارتفاع الـ navbar الـ fixed */
 }
 
 .img-header {
@@ -237,6 +203,7 @@ transform: translateY(-3px);
   font-weight: 400;
   margin-bottom: 10px;
   text-align: center;
+  animation-delay:0.5s ;
 
 }
 
@@ -397,6 +364,7 @@ transform: translateY(-3px);
   text-align: center;
   font-size: 48px;
   margin-bottom: 50px;
+  animation-delay: 0.5s;
 }
 
 .assistant-content {
@@ -422,6 +390,7 @@ transform: translateY(-3px);
   align-items: center;
   gap: 15px;
   transition: 0.6s;
+  animation-delay: 0.5s;
 }
 .feature:hover {
   background-color: #f7f8f9;
@@ -737,7 +706,7 @@ transform: translateY(-3px);
 /*==================================================================*/
 
 .testimonials {
-
+animation-delay: 0.5s;
   padding: 80px 0;
   background: #f6f6f6;
   position: relative;
@@ -1502,30 +1471,6 @@ justify-content: center;
   }
 
 }
-@media (max-width: 900px) {
-  .header-home {
-    margin-top: 65px;
-  }
-}
-
-@media (max-width: 768px) {
-  .header-home {
-    margin-top: 60px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-home {
-    margin-top: 55px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .header-home {
-    margin-top: 70px;
-  }
-}
-
 @media (max-width: 900px){
 
   .next-container,
