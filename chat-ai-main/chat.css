@@ -1,183 +1,48 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مساعدك الذكي </title>
+    <link rel="icon" type="image/png" href="../img/IMG-20260308-WA0043 (1).svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Cairo:wght@200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="chat.css">
 
-
-body{
-    background-color:rgba(110, 6, 6, 1);
-    padding: 30px;
- font-family: "Cairo", sans-serif;
-
-}
-.top{
-    display: flex;
-   justify-content: space-between;
-    padding: 0 30px;
-    color: #ffffff;
-    font-size: 18px;
-    position: absolute;
-    top: 20px;
-    width: 90%;
-   
-}
-.top a{
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-}
-.top img {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-}
-.card{
-    margin-top: 60px;
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 500px;
-    padding: 40px 20px ;
-    border-radius: 20px;
-    text-align: center;
-   margin-right: 340px;
-   margin-bottom: 60px;
-}   
- .stars-icon{
-    display: inline-block;
-    color: rgba(139, 26, 26, 1);
-    font-size: 40px;
-    margin-bottom: 15px;
-
- }
- h1{
-    color: rgb(51, 51, 51);
-    font-size: 30px;
-    margin-bottom: 8px;
-    font-weight: 500;
- }
- .subtitle{
-    color: rgb(119, 119, 119);
-    font-size: 16px;
-    margin-bottom: 30px;
- }
-
-.input-box{
-    display: flex;
-    display: rtl;
-    position: relative;
-    margin-bottom: 15px;
-  
-}
-#input2{
-    margin: 14px ;
-}
-input{
-    width: 100%;
-    padding: 15px 20px;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    background-color: #fcfcfc;
-    outline: none;
-    font-size: 14px;
-    text-align: right;
-    transition: 0.3s;
-}
-#input{
-    margin: 15px 20px;
-}
-input:focus{
-    border-color:rgba(139, 26, 26, 1);
-    background-color: #fff;
-}
-.ai-response-display {
-   background-color: #f8f9fa;
-   color: #888;
-  border: 1px solid #f0f0f0;
-  cursor: default;
- margin: 0 15px;
  
-     }
-.send-icon {
- position: absolute;
-  left: 15px;
- 
- transform: translatey(50%);
- color: white;
- background-color: #8f4040;
- border-radius:30%;
- cursor: pointer;
- font-size: 20px;
- 
-}
-.chat-box{
-    overflow-y:auto;
-    background:#f5f5f5;
-    padding:10px;
-    border-radius:10px;
-    margin-bottom:15px;
-    margin-right: 40px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    width: 80%;
-}
+<body>
 
-.message{
-    padding:8px 12px;
-    border-radius:15px;
-    max-width:70%;
-    font-size:14px;
-}
+    <div class="top">
+    <a href="../index.html"> <img src="../img/IMG-20260308-WA0043 (1).svg (3).svg" alt=""> 
+</span></a> 
+        <span>مدعم من <img src="image/met.png" width="50px"> </span>
+    </div>
+<div class="card">
+   <div class="stars-icon">
+     <img src="image/star.jpg " width="50px">
+    </div> 
+    <h1>مساعدك الذكي</h1>
+    <p class="subtitle">كيف يمكنني مساعدتك اليوم؟</p>
+   <div class="input-box" id="input">
+      <img src="image/star2.jpg" width="40px">
+ <input type="text" class="ai-response-display"
+     value="مرحباً! أنا مساعدك الذكي، كيف يمكنني مساعدتك اليوم؟" readonly>
+   </div>
+    <div class="chat-box"></div> 
+<div class="input-box" id="input2">
+  <input type="text" id="userQuestion" placeholder="اسأل الذكاء الاصطناعي الآن" >
+  <span class="send-icon" onclick="sendMessage()"><i class="fa-regular fa-paper-plane fa-beat"></i></span>
+</div>
+    </div>
+    <section>
+        <div class="end">
+        <p style="margin-left: 30px;text-align: center; color:#fff;">تحت رعاية أكاديمية مصر العالي للعلوم والتكنولوجيا </p>
+    </div>
+    </section>
+   <script src="chat.js"></script>
 
-.user{
-    background:rgba(139, 26, 26, 1);
-    color:white;
-    align-self:flex-end;
-}
+</body>
 
-.bot{
-    background:#e4e6eb;
-    align-self:flex-start;
-}
-@media (max-width: 700px){
-
-body{
-    padding:15px;
-}
-
-.top{
-    font-size:14px;
-    padding:0 10px;
-    width:100%;
-}
-
-.card{
-    max-width:100%;
-    margin-right:0;
-    margin-top:80px;
-    padding:30px 15px;
-}
-
-h1{
-    font-size:22px;
-}
-
-.subtitle{
-    font-size:14px;
-}
-
-input{
-    padding:12px 15px;
-    font-size:13px;
-}
-
-.chat-box{
-    max-height:250px;
-}
-
-.message{
-    font-size:13px;
-}
-
-}
+</html>
