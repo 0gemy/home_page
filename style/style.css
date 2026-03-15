@@ -765,7 +765,7 @@ body {
   .feature p { font-size: 15px; }
   #nc-map { height: 300px; width: 95%; }
   .nc-card { width: 100%; max-width: 320px; }
-  .revision-section { height: auto; min-height: 480px; }
+  .revision-section { height: auto; position: relative; min-height: 480px; }
   .slide { flex-direction: column; padding: 40px 15px; text-align: center; }
   .revision-title { font-size: 24px; margin: 20px 0; order: 1; }
   .revision-card {
@@ -781,8 +781,8 @@ body {
     order: 2;
   }
   .revision-bottom { order: 3; }
-  .slider-controls { position: static; justify-content: center; padding: 16px 0 0; }
-  .arrow { width: 40px; height: 40px; background: transparent; }
+  .slider-controls { position:absolute; justify-content: center; padding: 16px 0 0; }
+  .arrow { width: 40px; height: 40px; background: transparent; background-color: #1D8E4F; }
   .testimonials { padding: 40px 10px; }
   .testimonials-box { padding: 25px 15px; }
   .bg-circle { width: 300px; height: 300px; left: -150px; top: -100px; }
