@@ -2,72 +2,161 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
+    <title>إنشاء حساب</title>
         <link rel="icon" type="image/png" href="../img/IMG-20260308-WA0043 (1).svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Cairo:wght@200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Science+Gothic:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="left">
-            <img src="login.jpeg" alt="صورة">
-            <div class="overlay-content">
-                <h3>انقاذ الأرواح يبدأ بخطوة</h3>
+<body class="signup-page">
+<div class="container-fluid p-0 min-vh-100 d-flex flex-column">
+    <div class="row g-0 flex-grow-1">
+        <div class="col-md-6 p-0 position-relative signup-image-col">
+            <img src="signup.jpg" class="w-100 h-100" style="object-fit: cover;">
+            <div class="overlay-text position-absolute text-white text-center">
+                <h4>انقاذ الأرواح يبدأ بخطوة</h4>
                 <div class="lines">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
-                <a class="back-btn" href="../index.html">→ الرجوع للموقع</a>
+                <a href="../index.html" class="btn btn-light rounded-pill px-4 mt-3">
+                    → الرجوع للموقع
+                </a>
             </div>
         </div>
-        <div class="right">
-            <h1>تسجيل دخول <br> إلي حسابك</h1>
-            <form>
-                <label>البريد الإلكتروني</label>
-                <input type="email" placeholder="ادخل البريد الإلكتروني" required>
-                <label>كلمة المرور</label>
-                <div class="password-container">
-                    <input type="password" placeholder="ادخل كلمة المرور" id="password">
-                    <i class="fa-regular fa-eye eye" onclick="togglePassword()"></i>
-                </div>
-                <div class="options">
-                    <label class="remember">
-                        <input type="checkbox">
-                        حفظ كلمة المرور
-                    </label>
-                    <a href="#" class="forgot">نسيت كلمة المرور؟</a>
-                </div>
-                <button type="submit">تسجيل الدخول</button>
-                <div class="divider">
-                    <span></span>
-                    أو سجل لدي
-                    <span></span>
-                </div>
-                <button class="google">
-                    <img src="https://cdn-icons-png.flaticon.com/512/281/281764.png">
-                    المتابعة باستخدام Google
-                </button>
-                <button class="facebook">
-                    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
-                    المتابعة باستخدام Facebook
-                </button>
-            </form>
+        <div class="col-md-6 d-flex align-items-center justify-content-center signup-form-col">
+            <div class="signup-form-wrapper text-white">
+                <h2 class="text-center mb-4">إنشاء حساب</h2>
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">الاسم الاول</label>
+                            <input type="text" placeholder="الاسم الاول" class="form-control rounded-pill">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">اسم العائلة</label>
+                            <input type="text" placeholder="اسم العائلة" class="form-control rounded-pill">
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">العمر</label>
+                            <input type="number" placeholder="العمر" class="form-control rounded-pill">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">النوع</label>
+                            <select class="form-control gender-select">
+                                <option class="opsation" value="" selected disabled>النوع</option>
+                                <option class="opsation" value="male">ذكر</option>
+                                <option class="opsation" value="female">أنثى</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label">المحافظة</label>
+                            <select class="form-control gender-select">
+                                <option class="opsation" value="">اختر المحافظة</option>
+                                <option class="opsation" value="القاهرة">القاهرة</option>
+                                <option class="opsation" value="الجيزة">الجيزة</option>
+                                <option class="opsation" value="الإسكندرية">الإسكندرية</option>
+                                <option class="opsation" value="القليوبية">القليوبية</option>
+                                <option class="opsation" value="البحيرة">البحيرة</option>
+                                <option class="opsation" value="مطروح">مطروح</option>
+                                <option class="opsation" value="كفر الشيخ">كفر الشيخ</option>
+                                <option class="opsation" value="الغربية">الغربية</option>
+                                <option class="opsation" value="المنوفية">المنوفية</option>
+                                <option class="opsation" value="الدقهلية">الدقهلية</option>
+                                <option class="opsation" value="دمياط">دمياط</option>
+                                <option class="opsation" value="بورسعيد">بورسعيد</option>
+                                <option class="opsation" value="الإسماعيلية">الإسماعيلية</option>
+                                <option class="opsation" value="السويس">السويس</option>
+                                <option class="opsation" value="الشرقية">الشرقية</option>
+                                <option class="opsation" value="بني سويف">بني سويف</option>
+                                <option class="opsation" value="الفيوم">الفيوم</option>
+                                <option class="opsation" value="المنيا">المنيا</option>
+                                <option class="opsation" value="أسيوط">أسيوط</option>
+                                <option class="opsation" value="سوهاج">سوهاج</option>
+                                <option class="opsation" value="قنا">قنا</option>
+                                <option class="opsation" value="الأقصر">الأقصر</option>
+                                <option class="opsation" value="أسوان">أسوان</option>
+                                <option class="opsation" value="البحر الأحمر">البحر الأحمر</option>
+                                <option class="opsation" value="الوادي الجديد">الوادي الجديد</option>
+                                <option class="opsation" value="شمال سيناء">شمال سيناء</option>
+                                <option class="opsation" value="جنوب سيناء">جنوب سيناء</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">فصيلة الدم</label>
+                            <select class="form-control gender-select">
+                                <option class="opsation" value="" selected disabled>اختر فصيلة الدم</option>
+                                <option class="opsation" value="A+">A+</option>
+                                <option class="opsation" value="A-">A-</option>
+                                <option class="opsation" value="B+">B+</option>
+                                <option class="opsation" value="B-">B-</option>
+                                <option class="opsation" value="AB+">AB+</option>
+                                <option class="opsation" value="AB-">AB-</option>
+                                <option class="opsation" value="O+">O+</option>
+                                <option class="opsation" value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">البريد الالكتروني</label>
+                        <input type="email" placeholder="البريد الالكتروني" class="form-control rounded-pill">
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="position-relative mb-3">
+                            <label class="form-label">كلمة المرور</label>
+                            <input type="password" placeholder="كلمة المرور" class="form-control rounded-pill pe-5" id="password">
+                            <i class="fa-regular fa-eye position-absolute eye-icon" onclick="togglePassword()"></i>
+                        </div>
+                    </div>
+
+                    <div class="terms-check mb-3">
+                        <input type="checkbox" id="agree">
+                        <label for="agree">أوافق على الشروط و الأحكام</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-light w-100 rounded-pill mb-3">
+                        إنشاء حساب
+                    </button>
+
+                    <div class="d-flex align-items-center my-4">
+                        <hr class="flex-grow-1 text-white">
+                        <span class="mx-3 text-white fw-bold">أو سجل لدي</span>
+                        <hr class="flex-grow-1 text-white">
+                    </div>
+
+                    <button type="button" class="btn btn-light w-100 rounded-pill mb-2 d-flex align-items-center justify-content-center gap-2">
+                        <img src="https://img.icons8.com/color/24/google-logo.png">
+                        المتابعة باستخدام Google
+                    </button>
+
+                    <button type="button" class="facebook">
+                        <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
+                        المتابعة باستخدام Facebook
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-    <script>
-        function togglePassword() {
-            var pass = document.getElementById("password");
-            if (pass.type === "password") {
-                pass.type = "text";
-            } else {
-                pass.type = "password";
-            }
+</div>
+<script>
+    function togglePassword() {
+        const input = document.getElementById("password");
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
         }
-    </script>
+    }
+</script>
 </body>
 </html>
