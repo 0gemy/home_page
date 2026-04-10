@@ -9,32 +9,114 @@ body {
   font-family: "Cairo", sans-serif;
 }
 /* Preloader */
+
+  /* ============================================================
+   Preloader — إسعافات أولية
+   ============================================================ */
 #preloader {
   position: fixed;
-  inset: 0; /* بدل top/left */
+  inset: 0;
   background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999999999; /* أعلى حاجة */
+  z-index: 999999999;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 
-/* اللودر */
-.loader {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #eee;
-  border-top: 6px solid #7a0000;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
 }
 
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+/* ── حاوية المحتوى ── */
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
 }
-  
+
+/* ── رمز الصليب الأحمر ── */
+.cross-icon {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  animation: pulse-cross 1.6s ease-in-out infinite;
+}
+.cross-h,
+.cross-v {
+  position: absolute;
+  background: #7a0000;
+  border-radius: 4px;
+}
+.cross-h {
+  width: 100%;
+  height: 34%;
+  top: 33%;
+  left: 0;
+}
+.cross-v {
+  width: 34%;
+  height: 100%;
+  left: 33%;
+  top: 0;
+}
+
+@keyframes pulse-cross {
+  0%, 100% { transform: scale(1);   opacity: 1; }
+  50%       { transform: scale(1.15); opacity: 0.8; }
+}
+
+/* ── خط نبضات القلب (ECG) ── */
+.heartbeat-icon {
+  width: 180px;
+  height: 50px;
+}
+.heartbeat-icon svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.ecg-line {
+  fill: none;
+  stroke: #7a0000;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: draw-ecg 1.8s ease-out forwards,
+             ecg-loop 2.2s ease-in-out 1.8s infinite;
+}
+
+@keyframes draw-ecg {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ecg-loop {
+  0%, 100% { stroke-dashoffset: 0; opacity: 1; }
+  40%      { stroke-dashoffset: -30; opacity: 0.7; }
+  50%      { stroke-dashoffset: 260; opacity: 0; }
+  51%      { stroke-dashoffset: 260; opacity: 0; }
+  52%      { stroke-dashoffset: 260; opacity: 1; }
+  100%     { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* ── نص ── */
+.preloader-text {
+  font-family: "Cairo", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #7a0000;
+  letter-spacing: 0.04em;
+  margin: 0;
+  opacity: 0;
+  animation: fade-text 0.6s ease 1.2s forwards;
+}
+@keyframes fade-text {
+  to { opacity: 1; }
+}
+
 
 .navbar {
   display: flex;
