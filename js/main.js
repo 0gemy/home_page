@@ -1,16 +1,26 @@
 
+/* ============================================================
+   Preloader JS
+   ============================================================ */
 window.addEventListener("load", function () {
-  const preloader = document.getElementById("preloader");
+  var preloader = document.getElementById("preloader");
+  if (!preloader) return;
 
-  if (preloader) {
-    preloader.style.transition = "0.5s";
-    preloader.style.opacity = "0";
+  /* انتظر على الأقل 2.4 ثانية لتكتمل أنيميشن ECG */
+  var minTime = 2400;
+  var startTime = Date.now();
+  var elapsed = Date.now() - startTime;
+  var delay = Math.max(0, minTime - elapsed);
 
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 500);
-  }
+  setTimeout(function () {
+    preloader.classList.add("hide");
+    /* احذفه من DOM بعد انتهاء الـ transition */
+    preloader.addEventListener("transitionend", function () {
+      preloader.remove();
+    }, { once: true });
+  }, delay);
 });
+
 /* ============================================================
    Navbar
    ============================================================ */
