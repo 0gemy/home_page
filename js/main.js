@@ -1,9 +1,15 @@
 
 window.addEventListener("load", function () {
   const preloader = document.getElementById("preloader");
-  preloader.style.opacity = "0";
-  preloader.style.visibility = "hidden";
-  preloader.style.transition = "0.5s";
+
+  if (preloader) {
+    preloader.style.transition = "0.5s";
+    preloader.style.opacity = "0";
+
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  }
 });
 /* ============================================================
    Navbar
